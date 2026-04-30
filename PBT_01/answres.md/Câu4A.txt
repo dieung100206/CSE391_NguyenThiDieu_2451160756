@@ -1,0 +1,38 @@
+# PHẦN A4 – Table HTML
+
+## 1. Sự khác nhau giữa `<thead>`, `<tbody>`, `<tfoot>`
+
+### `<thead>`
+
+Dùng để chứa phần tiêu đề của bảng. Thường gồm tên các cột.
+
+### `<tbody>`
+
+Dùng để chứa nội dung chính của bảng, gồm các dòng dữ liệu.
+
+### `<tfoot>`
+
+Dùng để chứa phần cuối bảng. Thường dùng cho tổng kết, tổng tiền hoặc ghi chú.
+
+## 2. Tại sao KHÔNG NÊN dùng table để tạo layout trang web?
+
+### Lý do 1: Sai mục đích sử dụng
+
+Thẻ `table` được tạo ra để hiển thị dữ liệu dạng bảng, không phải để chia bố cục trang web.
+
+### Lý do 2: Khó responsive trên điện thoại
+
+Layout bằng table khó co giãn và hiển thị tốt trên màn hình nhỏ.
+
+### Lý do 3: Code rườm rà, khó bảo trì
+
+Dùng nhiều hàng, cột, lồng bảng khiến code dài và khó sửa.
+
+### Lý do 4: SEO và semantic kém
+
+Google khó hiểu cấu trúc nội dung hơn so với dùng `header`, `main`, `section`, `footer`.
+
+### Lý do 5: Hiện nay có cách tốt hơn
+
+Nên dùng CSS Flexbox hoặc CSS Grid để tạo layout hiện đại và dễ quản lý.
+
