@@ -1,0 +1,40 @@
+## Kết quả hiển thị:
+
+```text id="tq6lpa"
+Hộp 1
+Text A Text B
+Hộp 2
+Text C Text D
+Hộp 3
+```
+
+## Giải thích:
+
+### 1. Thẻ div là phần tử block
+
+* Chiếm toàn bộ chiều ngang.
+* Luôn xuống dòng mới.
+
+Vì vậy:
+
+* Hộp 1 nằm riêng một dòng
+* Hộp 2 nằm riêng một dòng
+* Hộp 3 nằm riêng một dòng
+
+### 2. Thẻ span là phần tử inline
+
+* Không xuống dòng.
+* Chỉ chiếm đúng phần nội dung.
+
+Nên:
+
+Text A và Text B nằm cùng một dòng.
+
+### 3. Thẻ strong là phần tử inline
+
+* Hiển thị cùng dòng như span.
+* Thường hiển thị chữ đậm.
+
+Nên:
+
+Text C và Text D nằm cùng dòng, trong đó Text D in đậm.
