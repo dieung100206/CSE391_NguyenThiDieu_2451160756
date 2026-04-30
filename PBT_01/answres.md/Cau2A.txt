@@ -1,0 +1,45 @@
+# Phần A2 - Semantic HTML & SEO
+
+## Tại sao trang web bị Google đánh giá SEO thấp?
+
+Trang web trên sử dụng quá nhiều thẻ `div`, thiếu cấu trúc semantic HTML nên công cụ tìm kiếm khó hiểu nội dung chính của trang.
+
+## Ít nhất 4 lỗi semantic:
+
+### 1. Dùng `<div class="header">` thay vì `<header>`
+
+Header nên dùng thẻ semantic để xác định phần đầu trang.
+
+### 2. Menu dùng `<div>` thay vì `<nav>` và `<ul><li>`
+
+Thanh điều hướng nên dùng:
+
+```html
+<nav>
+  <ul>
+    <li>...</li>
+  </ul>
+</nav>
+## Code sửa lại
+<header>
+    <div class="logo">ShopTLU</div>
+
+    <nav>
+        <ul>
+            <li><a href="/">Trang chủ</a></li>
+            <li><a href="/products">Sản phẩm</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <article class="product">
+        <h1>iPhone 16 Pro</h1>
+        <p class="price">25.990.000đ</p>
+        <img src="iphone.jpg" alt="iPhone 16 Pro">
+    </article>
+</main>
+
+<footer>
+    © 2026 ShopTLU
+</footer>

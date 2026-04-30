@@ -1,0 +1,23 @@
+# PHẦN C2 – So sánh & Tranh luận
+
+Em không đồng ý với ý kiến rằng chỉ cần dùng `<div>` cho mọi thứ rồi thêm class là đủ. Việc sử dụng semantic HTML rất quan trọng vì nó giúp trình duyệt, công cụ tìm kiếm và các công nghệ hỗ trợ hiểu rõ cấu trúc nội dung của trang web.
+
+Lý do kỹ thuật đầu tiên là **SEO**. Các công cụ tìm kiếm như Google sẽ đọc cấu trúc HTML để xác định đâu là tiêu đề chính, đâu là nội dung quan trọng, đâu là menu điều hướng. Nếu tất cả đều dùng `<div>`, bot tìm kiếm sẽ khó hiểu nội dung hơn. Ngược lại, khi dùng `<header>`, `<nav>`, `<main>`, `<article>`, `<footer>`, trang web có cấu trúc rõ ràng và dễ được đánh giá tốt hơn.
+
+Lý do thứ hai là **Accessibility**. Người dùng sử dụng trình đọc màn hình cần các thẻ semantic để điều hướng nhanh giữa các vùng nội dung. Ví dụ, screen reader có thể chuyển thẳng đến khu vực điều hướng nếu dùng thẻ `<nav>`, hoặc nhảy đến nội dung chính nếu dùng `<main>`. Nếu chỉ dùng `<div>`, trải nghiệm của người dùng khuyết tật sẽ kém hơn nhiều.
+
+Ví dụ cụ thể: thay vì viết:
+
+```html id="l8d0l7"
+<div class="menu">...</div>
+```
+
+ta nên dùng:
+
+```html id="7f5u1j"
+<nav>...</nav>
+```
+
+Khi đó trình duyệt và screen reader đều hiểu đây là khu vực menu điều hướng.
+
+Tuy nhiên, `<div>` vẫn rất phù hợp trong các trường hợp chỉ dùng để chia layout hoặc nhóm các phần tử phục vụ CSS/JavaScript, ví dụ tạo container, card sản phẩm hoặc bố cục grid. Vì vậy, semantic HTML không thay thế hoàn toàn `<div>`, mà nên kết hợp đúng mục đích để tạo ra trang web chuẩn và chuyên nghiệp.
