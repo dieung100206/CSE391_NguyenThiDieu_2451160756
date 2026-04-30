@@ -1,0 +1,35 @@
+# Phần A1 – HTTP & Browser
+
+## 1. Khi gõ https://shopee.vn vào trình duyệt và nhấn Enter
+
+Ít nhất 5 bước xảy ra theo đúng thứ tự:
+
+1. Trình duyệt kiểm tra cache DNS hoặc cache trình duyệt.
+2. Nếu chưa có, trình duyệt gửi yêu cầu DNS lookup để tìm địa chỉ IP của shopee.vn.
+3. Sau khi có IP, trình duyệt tạo kết nối TCP tới máy chủ.
+4. Vì dùng HTTPS nên trình duyệt thực hiện bắt tay SSL/TLS để mã hóa kết nối.
+5. Trình duyệt gửi HTTP request (GET /) đến máy chủ.
+6. Máy chủ trả về HTTP response gồm HTML, CSS, JS, hình ảnh...
+7. Trình duyệt tải các tài nguyên liên quan.
+8. Trình duyệt phân tích HTML/CSS/JS và render trang web lên màn hình.
+
+## 2. Tab Network trong Chrome DevTools cho thấy gì?
+
+Tab Network hiển thị:
+
+- Danh sách request gửi đến server
+- Loại file (HTML, CSS, JS, Image...)
+- Status Code (200, 404, 500...)
+- Thời gian tải
+- Kích thước file
+- Request / Response headers
+
+## 3. Screenshot tab Network
+
+(Chèn ảnh chụp màn hình vào thư mục screenshots)
+
+Yêu cầu đánh dấu:
+
+- Status Code của request đầu tiên
+- Tổng thời gian load trang
+- Một request file CSS

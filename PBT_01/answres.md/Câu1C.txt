@@ -1,0 +1,95 @@
+# PHẦN C1 – Cấu trúc HTML trang chi tiết sản phẩm
+
+```html
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết sản phẩm</title>
+</head>
+<body>
+
+    <header>
+        <!-- header dùng cho phần đầu trang -->
+        <h1>Shop Online</h1>
+
+        <nav>
+            <!-- nav dùng cho menu điều hướng chính -->
+            <ul>
+                <li><a href="/">Trang chủ</a></li>
+                <li><a href="/products">Sản phẩm</a></li>
+                <li><a href="/contact">Liên hệ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <nav aria-label="breadcrumb">
+        <!-- nav vì đây là điều hướng breadcrumb -->
+        <ol>
+            <!-- ol vì breadcrumb có thứ tự -->
+            <li><a href="/">Trang chủ</a></li>
+            <li><a href="/phones">Điện thoại</a></li>
+            <li>iPhone 16</li>
+        </ol>
+    </nav>
+
+    <main>
+        <!-- main là nội dung chính của trang -->
+
+        <section class="product-detail">
+            <!-- section gom nhóm nội dung chi tiết sản phẩm -->
+
+            <section class="gallery">
+                <!-- section chứa ảnh sản phẩm -->
+                <img src="img1.jpg" alt="Ảnh 1">
+                <img src="img2.jpg" alt="Ảnh 2">
+                <img src="img3.jpg" alt="Ảnh 3">
+                <img src="img4.jpg" alt="Ảnh 4">
+                <img src="img5.jpg" alt="Ảnh 5">
+            </section>
+
+            <article class="product-info">
+                <!-- article vì đây là nội dung sản phẩm độc lập -->
+
+                <h2>iPhone 16</h2>
+                <!-- h2 là tên sản phẩm -->
+
+                <p class="price">Giá sản phẩm</p>
+                <!-- p hiển thị giá -->
+
+                <p class="rating">★★★★★</p>
+                <!-- p hiển thị đánh giá -->
+
+                <section class="description">
+                    <!-- section mô tả sản phẩm -->
+                    <h3>Mô tả</h3>
+                    <p>Thông tin mô tả sản phẩm</p>
+                </section>
+            </article>
+
+        </section>
+
+        <section class="specifications">
+            <!-- section cho bảng thông số -->
+            <h2>Thông số kỹ thuật</h2>
+
+            <table>
+                <!-- table dùng cho dữ liệu dạng bảng -->
+                <thead>
+                    <tr>
+                        <th>Thuộc tính</th>
+                        <th>Giá trị</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Màn hình</td>
+                        <td>6.1 inch</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="reviews">
