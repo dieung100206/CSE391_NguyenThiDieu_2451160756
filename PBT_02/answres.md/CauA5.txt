@@ -1,0 +1,35 @@
+ So sánh <figure> và <img>
+1. <img> là gì?
+- Là thẻ dùng để hiển thị hình ảnh
+- Là self-closing tag
+- Bắt buộc nên có thuộc tính al
+Ví dụ:
+<img src="iphone.jpg" alt="iPhone 16 Pro">
+ Chỉ dùng để hiển thị ảnh, không mang ý nghĩa bổ sung
+2. <figure> là gì?
+- Là thẻ semantic dùng để *bao một nội dung độc lập*
+- Thường chứa:
+  - <img>
+  - <figcaption> (chú thích)
+Ví dụ:
+<figure>
+  <img src="iphone.jpg" alt="iPhone 16 Pro">
+  <figcaption>iPhone 16 Pro mới nhất</figcaption>
+</figure>
+Mang ý nghĩa: hình ảnh + chú thích đi cùng nhau
+3. So sánh
+| Tiêu chí        | <img>                  | <figure>                         |
+|----------------|-------------------------|----------------------------------|
+| Chức năng       | Hiển thị ảnh            | Nhóm nội dung (ảnh, biểu đồ, code…) |
+| Semantic        | Không rõ nghĩa          | Có ý nghĩa semantic rõ ràng       |
+| Có caption      | Không                   | Có thể dùng <figcaption>        |
+| Có thể chứa gì  | Không chứa gì           | Có thể chứa nhiều phần tử         |
+4. Khi nào dùng?
+- Dùng <img>:
+  - Khi chỉ cần hiển thị ảnh đơn giản
+- Dùng <figure>:
+  - Khi ảnh cần chú thích
+  - Khi ảnh là nội dung độc lập (ví dụ: sản phẩm, biểu đồ)
+ Kết luận
+- <img> = hiển thị ảnh  
+- <figure> = nhóm ảnh + chú thích + semantic rõ ràng
