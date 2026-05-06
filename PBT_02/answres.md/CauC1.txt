@@ -1,0 +1,65 @@
+# BÀI: Sửa lỗi Form (Validation + Accessibility + Best Practices)
+Lỗi 1: Dòng 2 — Input "Tên" không có <label for="..."> → vi phạm accessibility  
+Sửa: 
+<label for="name">Tên:</label>
+<input type="text" id="name" name="name" required>
+Lỗi 2: Dòng 4 — Input email không có label → screen reader không hiểu  
+Sửa:
+<label for="email">Email:</label>
+<input type="email" id="email" name="email" placeholder="Email của bạn" required>
+Lỗi 3: Dòng 6 — Input password không có label  
+Sửa:
+<label for="password">Mật khẩu:</label>
+<input type="password" id="password" name="password" required minlength="6">
+Lỗi 4: Dòng 7 — Input "Nhập lại mật khẩu" không có label  
+Sửa:
+<label for="confirm">Nhập lại mật khẩu:</label>
+<input type="password" id="confirm" name="confirm" required minlength="6">
+Lỗi 5: Dòng 9 — Phone dùng type="text" → sai semantic  
+Sửa:
+<label for="phone">Phone:</label>
+<input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required>
+Lỗi 6: Dòng 9 — Phone có sẵn value → không nên (user phải tự nhập)  
+Sửa:
+Bỏ value="0901234567"
+Lỗi 7: Dòng 11 — <select> không có label  
+Sửa:
+<label for="city">Thành phố:</label>
+<select id="city" name="city">
+    <option value="">--Chọn--</option>
+    <option value="hn">Hà Nội</option>
+    <option value="hcm">TP.HCM</option>
+</select>
+Lỗi 8: Dòng 16 — "Tôi đồng ý điều khoản" không có checkbox  
+Sửa:
+<input type="checkbox" id="terms" name="terms" required>
+<label for="terms">Tôi đồng ý điều khoản</label>
+Form sau khi sửa hoàn chỉnh
+<form>
+    <label for="name">Tên:</label>
+    <input type="text" id="name" name="name" required>
+    <br><br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" placeholder="Email của bạn" required>
+    <br><br>
+    <label for="password">Mật khẩu:</label>
+    <input type="password" id="password" name="password" required minlength="6">
+    <br><br>
+    <label for="confirm">Nhập lại mật khẩu:</label>
+    <input type="password" id="confirm" name="confirm" required minlength="6">
+    <br><br>
+    <label for="phone">Phone:</label>
+    <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required>
+    <br><br>
+    <label for="city">Thành phố:</label>
+    <select id="city" name="city">
+        <option value="">--Chọn--</option>
+        <option value="hn">Hà Nội</option>
+        <option value="hcm">TP.HCM</option>
+    </select>
+    <br><br>
+    <input type="checkbox" id="terms" name="terms" required>
+    <label for="terms">Tôi đồng ý điều khoản</label>
+    <br><br>
+    <input type="submit" value="Gửi">
+</form>
