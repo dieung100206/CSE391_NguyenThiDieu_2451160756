@@ -1,72 +1,41 @@
 Validation (Chương 07)
-
 ## Dự đoán kết quả khi bấm Submit
-
----
-
-### Trường hợp 1
+ Trường hợp 1
 <input type="text" required value="">
-
-*Kết quả:*
+Kết quả:
 - Không submit được
-
-*Giải thích:*
+Giải thích:
 - Thuộc tính required yêu cầu người dùng phải nhập dữ liệu
 - Giá trị đang rỗng → không hợp lệ
-
----
-
 ### Trường hợp 2
 <input type="email" value="abc">
-
-*Kết quả:*
+Kết quả:
 - Không submit được
-
-*Giải thích:*
+Giải thích:
 - type="email" yêu cầu đúng định dạng email (phải có @)
 - "abc" không phải email hợp lệ
-
----
-
-### Trường hợp 3
+Trường hợp 3
 <input type="number" min="1" max="10" value="15">
-
-*Kết quả:*
+Kết quả:
 - Không submit được
-
-*Giải thích:*
+Giải thích:
 - Giá trị hợp lệ nằm trong khoảng từ 1 đến 10
 - 15 vượt quá max → không hợp lệ
-
----
-
-### Trường hợp 4
+Trường hợp 4
 <input type="text" pattern="[0-9]{10}" value="abc123">
-
-*Kết quả:*
+Kết quả:
 - Không submit được
-
-*Giải thích:*
+Giải thích:
 - Pattern yêu cầu đúng 10 chữ số
 - "abc123" chứa chữ cái và không đủ 10 số
-
----
-
-### Trường hợp 5
+ Trường hợp 5
 <input type="password" minlength="8" value="123">
-
-*Kết quả:*
+Kết quả:
 - Không submit được
-
-*Giải thích:*
+Giải thích:
 - minlength="8" yêu cầu ít nhất 8 ký tự
 - "123" chỉ có 3 ký tự → không hợp lệ
-
----
-
-## So sánh với kết quả thực tế
-
+ So sánh với kết quả thực tế
 Sau khi chạy file HTML và bấm Submit:
-
 - Trình duyệt chặn submit ở tất cả các trường hợp
 - Hiển thị thông báo lỗi tương ứng với từng input
