@@ -1,0 +1,45 @@
+1. Thuộc tính loading="lazy" trên <img>
+- loading="lazy" giúp trình duyệt *chỉ tải ảnh khi gần xuất hiện trong màn hình (viewport)*
+ Cải thiện gì?
+- Tăng tốc độ load trang ban đầu
+- Giảm băng thông (không tải ảnh chưa cần)
+- Tốt cho mobile (tiết kiệm data)
+- Cải thiện trải nghiệm người dùng
+Khi nào KHÔNG nên dùng?
+- Ảnh ở đầu trang (above-the-fold, ảnh banner)
+- Ảnh quan trọng cần hiển thị ngay
+- Ảnh ảnh hưởng đến layout chính
+Vì lazy load có thể làm ảnh hiển thị chậm nếu cần ngay
+2. Tại sao nên cung cấp nhiều <source> trong <video>?
+ Lý do:
+- Trình duyệt khác nhau hỗ trợ format video khác nhau
+- Đảm bảo video chạy được trên mọi trình duyệt
+- Nếu format này không chạy → trình duyệt tự chọn format khác
+ Ví dụ:
+<video controls>
+  <source src="video.mp4" type="video/mp4">
+  <source src="video.webm" type="video/webm">
+  <source src="video.ogg" type="video/ogg">
+</video>
+3 format video phổ biến:
+- MP4 (phổ biến nhất, hỗ trợ rộng)
+- WebM (tối ưu web, nhẹ)
+- OGG (ít phổ biến hơn nhưng vẫn dùng)
+ 3. Thuộc tính alt trên <img>
+ Dùng để làm gì?
+- Giúp screen reader mô tả ảnh cho người khiếm thị
+- Hiển thị khi ảnh bị lỗi không tải được
+- Hỗ trợ SEO (công cụ tìm kiếm hiểu nội dung ảnh)
+Viết alt cho các trường hợp:
+1. Ảnh sản phẩm iPhone 16
+alt="iPhone 16 Pro màu đen với màn hình hiển thị"
+2. Ảnh trang trí (decorative)
+ alt=""
+- Để rỗng để screen reader bỏ qua
+- Tránh gây nhiễu thông tin
+ 3. Ảnh biểu đồ doanh thu Q1/2026
+ alt="Biểu đồ doanh thu quý 1 năm 2026 tăng dần qua các tháng"
+ Kết luận
+- loading="lazy" giúp tối ưu hiệu suất nhưng không dùng cho ảnh quan trọng
+- <video> nên có nhiều <source> để tương thích trình duyệt
+- alt rất quan trọng cho accessibility và SEO
