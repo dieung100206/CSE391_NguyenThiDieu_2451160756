@@ -1,48 +1,20 @@
 
-<!DOCTYPE>
-<html>
-<head>
-    <title>Trang web
-    <meta charset="utf8">
-</head>
-<body>
-    <h1>Welcome to ShopTLU<h1>
-    
-    <header>
-        <nav>
-            <a href="home">Trang chủ<a>
-            <a href="products">Sản phẩm</a>
-        </nav>
-    </header>
-    
-    <main>
-        <section>
-            <h3>Sản phẩm hot</h3>
-            <img src=iphone.jpg>
-            <p>iPhone 16 Pro</p>
-            <p>Giá: <b>25.990.000đ</p></b>
-        </section>
-        
-        <section>
-            <h3>Thông tin</h3>
-            <table>
-                <tr>
-                    <td>Tên</td>
-                    <td>Giá</td>
-                </tr>
-                <tr>
-                    <td>iPhone</td>
-                    <td>25tr</td>
-                </tr>
-            </table>
-        </section>
-    </main>
-    
-    <main>
-        <p>Sidebar content</p>
-    </main>
-    
-    <footer>
-        <p>Copyright 2026
-    </footer>
-</body>
+1. type="email" → Ô nhập dạng text (có thể hiện bàn phím email trên mobile) → Tự kiểm tra có ký tự "@" và định dạng email → Dùng cho đăng ký tài khoản, nhập email nhận hóa đơn
+
+2. type="password" → Ô nhập bị ẩn ký tự (hiện dấu ●●●) → Có thể kết hợp minlength/maxlength để kiểm tra độ dài → Dùng cho đăng nhập, tạo mật khẩu
+
+3. type="number" → Ô nhập số, có nút tăng/giảm (spinner) → Tự kiểm tra chỉ cho nhập số, có thể giới hạn min/max → Dùng nhập số lượng sản phẩm
+
+4. type="tel" → Ô nhập số điện thoại → Không validate chặt nhưng hiển thị bàn phím số trên mobile → Dùng nhập số điện thoại giao hàng
+
+5. type="url" → Ô nhập đường link → Tự kiểm tra định dạng URL (http/https) → Dùng khi nhập link website (ví dụ shop đối tác)
+
+6. type="search" → Ô nhập giống text nhưng có nút xóa nhanh (×) → Không validation đặc biệt → Dùng cho thanh tìm kiếm sản phẩm
+
+7. type="date" → Hiển thị bộ chọn ngày (calendar) → Tự kiểm tra định dạng ngày hợp lệ → Dùng chọn ngày giao hàng
+
+8. type="radio" → Nút chọn tròn (chỉ chọn 1 trong nhiều lựa chọn) → Đảm bảo chỉ chọn 1 option trong group → Dùng chọn phương thức thanh toán
+
+9. type="checkbox" → Ô vuông tích chọn (chọn nhiều) → Không validation mặc định (có thể dùng required) → Dùng chọn nhiều sản phẩm hoặc đồng ý điều khoản
+
+10. type="file" → Nút upload file → Có thể giới hạn loại file bằng accept → Dùng upload ảnh đánh giá sản phẩm
