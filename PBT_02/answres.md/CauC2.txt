@@ -1,0 +1,51 @@
+BÀI: Form đăng ký ngân hàng số
+1. Regex pattern
+CMND/CCCD (đúng 12 chữ số)
+pattern="^[0-9]{12}$"
+Giải thích:
+- ^ bắt đầu chuỗi
+- [0-9]{12} đúng 12 chữ số
+- $ kết thúc chuỗi
+Số tài khoản (10–15 chữ số)
+pattern="^[0-9]{10,15}$"
+Giải thích:
+- Cho phép từ 10 đến 15 chữ số
+2. HTML5 validation có đủ an toàn không?
+Câu trả lời: KHÔNG đủ an toàn
+Lý do:
+- HTML5 validation chỉ chạy ở phía client (trình duyệt)
+- Người dùng có thể:
+  - Tắt validation (dev tools, sửa HTML)
+  - Gửi request trực tiếp (Postman, curl)
+- Không có kiểm soát bảo mật thực sự
+ Vì vậy:
+- HTML5 chỉ giúp trải nghiệm người dùng (UX)
+- Không đảm bảo bảo mật
+3. 3 loại validation HTML5 KHÔNG làm được
+1. So sánh 2 trường
+- Ví dụ: kiểm tra "Nhập lại PIN" phải giống PIN
+- HTML không tự làm được → cần JavaScript
+2. Kiểm tra dữ liệu với server
+- Ví dụ:
+  - Email đã tồn tại chưa
+  - Số tài khoản có hợp lệ không
+- Phải gọi API → HTML không làm được
+3. Logic phức tạp
+- Ví dụ:
+  - CMND phải đúng theo quy tắc checksum
+  - PIN không được là "123456"
+- HTML pattern không đủ xử lý
+4. 2 rủi ro nếu chỉ validate Frontend
+ Rủi ro 1: Bypass validation
+- Hacker có thể:
+  - Gửi request trực tiếp (không qua form)
+  - Nhập dữ liệu sai nhưng vẫn vào hệ thống
+Rủi ro 2: Dữ liệu bẩn / tấn công
+- Có thể nhập:
+  - Script độc hại (XSS)
+  - Dữ liệu sai định dạng
+- Gây lỗi hệ thống hoặc lộ thông tin
+Kết luận
+HTML5 validation:
+  - Tốt cho UX
+  - Không đủ cho bảo mật
