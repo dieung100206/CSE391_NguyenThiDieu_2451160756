@@ -1,0 +1,60 @@
+
+1. Tại sao <label for="email"> quan trọng cho screen reader?
+- <label> giúp liên kết mô tả với ô input thông qua thuộc tính for
+- Khi screen reader đọc, nó sẽ:
+  - Đọc nội dung label trước
+  - Sau đó đọc input tương ứng
+Ví dụ:
+<label for="email">Email</label>
+<input type="email" id="email">
+ Screen reader sẽ đọc: "Email, edit text"
+Nếu không có label:
+- Screen reader chỉ đọc: "edit text"
+- Người dùng không biết phải nhập gì
+Kết luận:
+- <label> giúp người khiếm thị hiểu rõ chức năng của input
+- Cải thiện khả năng truy cập 
+2. Khi nào dùng <fieldset> + <legend>
+- Dùng khi có nhóm các input liên quan với nhau
+- Giúp:
+  - Gom nhóm logic
+  - Screen reader hiểu đây là 1 nhóm
+Ví dụ: Chọn phương thức thanh toán
+<fieldset>
+  <legend>Phương thức thanh toán</legend>
+  <input type="radio" name="payment" id="cod">
+  <label for="cod">Thanh toán khi nhận hàng</label>
+  <input type="radio" name="payment" id="bank">
+  <label for="bank">Chuyển khoản</label>
+</fieldset>
+ Screen reader sẽ đọc:
+"Phương thức thanh toán, group..."
+Khi dùng:
+- Radio button
+- Checkbox nhóm
+- Form nhiều lựa chọn liên quan
+3. aria-label dùng khi nào?
+- Dùng khi không có label hiển thị
+- Cung cấp tên cho screen reader
+Ví dụ: icon search không có chữ
+<input type="search" aria-label="Tìm kiếm sản phẩm">
+Screen reader vẫn hiểu chức năng input
+4. Tại sao KHÔNG nên dùng aria-label khi đã có <label>?
+<label> đã là semantic chuẩn của HTML
+Screen reader ưu tiên đọc label thật
+Nếu dùng cả hai:
+Có thể gây:
+   Đọc trùng
+   Gây rối thông tin
+ Ví dụ không tốt:
+<label for="email">Email</label>
+<input id="email" aria-label="Nhập email">
+→ Screen reader có thể đọc 2 lần hoặc không nhất quán
+Kết luận:
+- Ưu tiên dùng <label>
+- Chỉ dùng aria-label khi không thể dùng label
+Tổng kết
+- <label>: bắt buộc để mô tả input
+- <fieldset> + <legend>: dùng để nhóm input liên quan
+- aria-label: giải pháp thay thế khi không có label
+- Không lạm dụng ARIA khi HTML đã đủ semantic
