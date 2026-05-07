@@ -1,0 +1,62 @@
+3 cách nhúng CSS vào HTML gồm Inline CSS, Internal CSS và External CSS.
+1. Inline CSS:
+Là cách viết CSS trực tiếp trong thẻ HTML bằng thuộc tính style.
+Ví dụ:
+<p style="color:red;">Xin chào</p>
+Ưu điểm:
+- Viết nhanh
+- Dễ test nhanh giao diện
+- Áp dụng riêng cho một element
+Nhược điểm:
+- Làm HTML rối
+- Khó bảo trì
+- Không tái sử dụng được
+Khi nào nên dùng:
+- Test nhanh
+- Chỉnh riêng một phần tử đặc biệt
+2. Internal CSS:
+Là cách viết CSS trong thẻ <style> bên trong file HTML.
+Ví dụ:
+<head>
+<style>
+p{
+    color: blue;
+}
+</style>
+</head>
+Ưu điểm:
+- Dễ quản lý hơn inline
+- Không cần file CSS riêng
+Nhược điểm:
+- Không dùng lại cho nhiều trang
+- File HTML dài hơn
+Khi nào nên dùng:
+- Website nhỏ
+- Bài thực hành đơn giản
+3. External CSS:
+Là cách viết CSS ở file riêng và liên kết bằng thẻ <link>.
+Ví dụ:
+File HTML:
+<link rel="stylesheet" href="style.css">
+File CSS:
+p{
+    color: green;
+}
+Ưu điểm:
+- Chuyên nghiệp
+- Dễ bảo trì
+- Tái sử dụng cho nhiều trang
+- Code gọn gàng
+Nhược điểm:
+- Phải tạo thêm file CSS
+- Sai đường dẫn sẽ không chạy
+Khi nào nên dùng:
+- Website thực tế
+- Project lớn
+- Bài tập chuẩn
+Nếu cùng một element có cả 3 cách CSS đồng thời áp dụng thì Inline CSS sẽ được ưu tiên cao nhất, sau đó đến Internal CSS và cuối cùng là External CSS.
+Thứ tự ưu tiên:
+Inline CSS > Internal CSS > External CSS
+Ví dụ:
+<p style="color:red;">Hello</p>
+Nếu internal CSS đặt màu xanh và external CSS đặt màu xanh lá thì kết quả cuối cùng vẫn là màu đỏ vì Inline CSS có độ ưu tiên cao nhất do được viết trực tiếp trên element.
