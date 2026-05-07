@@ -1,0 +1,70 @@
+Trường hợp 1: content-box (mặc định)
+.box-1 {
+    width: 400px;
+    padding: 20px;
+    border: 5px solid black;
+    margin: 10px;
+}
+Trong content-box:
+width chỉ tính phần content, chưa tính padding và border.
+Chiều rộng hiển thị:
+= width + padding trái + padding phải + border trái + border phải
+= 400 + 20 + 20 + 5 + 5
+= 450px
+→ Chiều rộng hiển thị = 450px
+Không gian chiếm trên trang:
+= 450 + margin trái + margin phải
+= 450 + 10 + 10
+= 470px
+→ Không gian chiếm trên trang = 470px
+Trường hợp 2: border-box
+.box-2 {
+    box-sizing: border-box;
+    width: 400px;
+    padding: 20px;
+    border: 5px solid black;
+    margin: 10px;
+}
+Trong border-box:
+width đã bao gồm content + padding + border.
+→ Chiều rộng hiển thị = 400px
+Kích thước content thực tế:
+= 400 - padding trái - padding phải - border trái - border phải
+= 400 - 20 - 20 - 5 - 5
+= 350px
+→ Kích thước content thực tế = 350px
+Không gian chiếm trên trang:
+= width + margin trái + margin phải
+= 400 + 10 + 10
+= 420px
+→ Không gian chiếm trên trang = 420px
+Trường hợp 3: Margin collapse
+.box-a {
+    margin-bottom: 25px;
+}
+.box-b {
+    margin-top: 40px;
+}
+Khoảng cách giữa 2 box:
+KHÔNG cộng lại.
+Browser chỉ lấy margin lớn hơn.
+→ Khoảng cách giữa box-a và box-b = 40px
+Giải thích:
+Margin theo chiều dọc có hiện tượng margin collapse.
+Khi hai margin dọc chạm nhau, trình duyệt không cộng mà chỉ lấy giá trị lớn nhất.
+Vì:
+40px > 25px
+nên kết quả là:
+40px chứ không phải 65px.
+Nâng cao:
+.box-a {
+    margin-bottom: -10px;
+}
+.box-b {
+    margin-top: 40px;
+}
+Khoảng cách:
+= 40 + (-10)
+= 30px
+→ Khoảng cách = 30px
+Vì margin âm sẽ làm hai box kéo lại gần nhau.
