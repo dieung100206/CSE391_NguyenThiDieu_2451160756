@@ -1,0 +1,67 @@
+Giải thích lỗi layout
+1. Tính chiều rộng thực tế
+ Sidebar
+ `css
+width: 300px;
+padding: 20px;
+border: 1px solid;
+Chiều rộng thực tế:
+text
+300 + 20 + 20 + 1 + 1 = 342px
+ Content
+`css
+width: 660px;
+padding: 30px;
+border: 1px solid;
+Chiều rộng thực tế:
+text
+660 + 30 + 30 + 1 + 1 = 722px
+ Tổng chiều rộng
+text
+342 + 722 = 1064px
+Trong khi container chỉ rộng:
+text
+960px
+=> Layout bị vỡ, content bị đẩy xuống dòng mới.
+2. Nguyên nhân lỗi
+Do CSS mặc định dùng:
+css
+box-sizing: content-box;
+Nên:
+`text
+width chưa bao gồm padding và border
+Padding và border được cộng thêm vào width làm tổng chiều rộng vượt quá container.
+3. Cách sửa 1 — Dùng border-box
+css
+* {
+    box-sizing: border-box;
+}
+```
+Khi dùng border-box:
+```text
+width đã bao gồm padding và border
+```
+Nên:
+* sidebar vẫn đúng 300px
+* content vẫn đúng 660px
+Tổng đúng 960px nên không bị vỡ layout.
+---
+# 4. Cách sửa 2 — Không dùng border-box
+Giảm width thật của các phần tử.
+## Sidebar
+```text
+300 - 20 - 20 - 1 - 1 = 258px
+```css
+.sidebar {
+    width: 258px;
+}
+Content
+text
+660 - 30 - 30 - 1 - 1 = 598px
+```
+```css
+.content {
+    width: 598px;
+}
+``
+Khi đó tổng chiều rộng sẽ vừa đúng container 960px.
