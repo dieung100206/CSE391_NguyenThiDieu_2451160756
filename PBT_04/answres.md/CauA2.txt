@@ -1,0 +1,112 @@
+Dự đoán Layout
+Trường hợp 1
+```css id="e7g5r2"
+.container {
+    display: flex;
+}
+.item {
+    flex: 1;
+}
+```
+## Dự đoán
+* 4 items nằm trên cùng 1 hàng
+* Mỗi item rộng bằng nhau
+## Bố cục
+```text id="mk7x0e"
+| item1 | item2 | item3 | item4 |
+```
+---
+# Trường hợp 2
+```css id="3hfr87"
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+.item {
+    width: 45%;
+    margin: 2.5%;
+}
+```
+## Phân tích
+Mỗi item:
+```text id="jlwmif"
+45% + 2.5% + 2.5% = 50%
+``
+=> mỗi hàng chứa được 2 item.
+Có 6 items:
+```text id="ql8k8z"
+6 / 2 = 3 hàng
+```
+## Bố cục
+```text id="hbb6aj"
+| item1 | item2 |
+| item3 | item4 |
+| item5 | item6 |
+```
+---
+# Trường hợp 3
+```css id="l2b32x"
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+```
+## Dự đoán
+* 3 items nằm trên 1 hàng
+* Item đầu sát trái
+* Item cuối sát phải
+* Item giữa ở giữa
+* Các item căn giữa theo chiều dọc
+## Bố cục
+```text id="vl4znd"
+| item1           item2           item3 |
+```
+---
+# Trường hợp 4
+```css id="ijv7uj"
+.container {
+    display: grid;
+    grid-template-columns: 200px 1fr 200px;
+    gap: 20px;
+}
+```
+## Dự đoán
+Grid có 3 cột:
+* Cột trái: 200px
+* Cột giữa: co giãn
+* Cột phải: 200px
+3 items sẽ nằm trên cùng 1 hàng.
+## Bố cục
+```text id="n2x2g0"
+| 200px |   co giãn   | 200px |
+| item1 |    item2    | item3 |
+```
+--
+# Trường hợp 5
+```css id="u5j67y"
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+```
+## Phân tích
+Grid có:
+* 3 cột bằng nhau
+Có 7 items:
+```text id="ibjlwm"
+7 items / 3 cột
+```
+=> cần:
+* 3 hàng
+---
+## Bố cục
+```text id="mdrz3e"
+| item1 | item2 | item3 |
+| item4 | item5 | item6 |
+| item7 |        |        |
+```
+Item7 nằm:
+* hàng thứ 3
+* cột đầu tiên
