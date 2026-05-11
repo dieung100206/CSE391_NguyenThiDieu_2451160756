@@ -1,0 +1,9 @@
+# Chọn Flexbox hay Grid
+
+| Tình huống                                                        | Nên dùng          | Giải thích                                                                                           |
+| ----------------------------------------------------------------- | ----------------- | ---------------------------------------------------------------------------------------------------- |
+| Navigation bar ngang (logo + menu + buttons)                      | Flexbox           | Flexbox rất phù hợp cho layout 1 chiều (hàng ngang), dễ căn giữa và tạo khoảng cách giữa các phần tử |
+| Lưới ảnh Instagram (3 cột đều nhau, số ảnh không biết trước)      | Grid              | Grid phù hợp layout dạng lưới 2 chiều (hàng + cột), dễ tạo 3 cột bằng nhau                           |
+| Layout blog: main content + sidebar                               | Grid              | Có cấu trúc nhiều vùng rõ ràng, Grid giúp chia cột chính và sidebar dễ hơn                           |
+| Footer với 4 cột thông tin                                        | Grid hoặc Flexbox | Nếu chỉ là 1 hàng ngang đơn giản có thể dùng Flexbox, nhưng Grid dễ chia 4 cột đều nhau hơn          |
+| Card sản phẩm (ảnh trên, text giữa, nút dưới — nút luôn dính đáy) | Flexbox           | Flexbox theo chiều dọc (`flex-direction: column`) giúp đẩy nút xuống đáy bằng `margin-top: auto`     |
