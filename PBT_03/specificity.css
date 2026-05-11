@@ -1,0 +1,49 @@
+/* 1 - Specificity: 0,0,1 */
+p {
+    color: gray;
+}
+
+/* 2 - Specificity: 0,1,0 */
+.text {
+    color: blue;
+}
+
+/* 3 - Specificity: 0,1,1 */
+p.text {
+    color: green;
+}
+
+/* 4 - Specificity: 0,2,0 */
+.text.highlight {
+    color: orange;
+}
+
+/* 5 - Specificity: 0,2,1 */
+p.text.highlight {
+    color: pink;
+}
+
+/* 6 - Specificity: 1,0,0 */
+#demo {
+    color: red;
+}
+
+/* 7 - Specificity: 1,0,1 */
+p#demo {
+    color: purple;
+}
+
+/* 8 - Specificity: 1,1,0 */
+#demo.text {
+    color: brown;
+}
+
+/* 9 - Specificity: 1,1,1 */
+p#demo.text {
+    color: teal;
+}
+
+/* 10 - Specificity: 1,2,1 */
+p#demo.text.highlight {
+    color: black;
+}
