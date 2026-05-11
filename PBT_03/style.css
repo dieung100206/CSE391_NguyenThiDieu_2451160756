@@ -1,0 +1,98 @@
+* {
+    box-sizing: border-box;
+}
+
+/* Element selector */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* ID selector */
+#top {
+    background: linear-gradient(to right, #ff758c, #ff7eb3);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Element selector */
+nav {
+    background-color: #222;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Descendant selector */
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+/* Pseudo-class selector */
+nav a:hover {
+    color: yellow;
+    text-decoration: underline;
+}
+
+/* Class selector */
+.active {
+    color: #00ffcc;
+}
+
+main {
+    padding: 20px;
+}
+
+/* Class selector */
+.info {
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+/* Element selector */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+/* Descendant selector */
+table th {
+    background-color: #333;
+    color: white;
+}
+
+/* Descendant selector */
+table th,
+table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Pseudo-class selector */
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Pseudo-class selector */
+tr:hover {
+    background-color: #d6f5ff;
+}
+
+/* Element selector */
+footer {
+    background-color: #222;
+    color: #ccc;
+    text-align: center;
+    padding: 15px;
+    margin-top: 20px;
+}
