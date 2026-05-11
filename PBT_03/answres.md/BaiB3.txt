@@ -1,0 +1,40 @@
+# CSS Specificity
+## 10 Rules theo thứ tự từ thấp đến cao
+| Rule                  | Specificity |
+| --------------------- | ----------- |
+| p                     | 0,0,1       |
+| .text                 | 0,1,0       |
+| p.text                | 0,1,1       |
+| .text.highlight       | 0,2,0       |
+| p.text.highlight      | 0,2,1       |
+| #demo                 | 1,0,0       |
+| p#demo                | 1,0,1       |
+| #demo.text            | 1,1,0       |
+| p#demo.text           | 1,1,1       |
+| p#demo.text.highlight | 1,2,1       |
+# Kết quả cuối cùng
+Phần tử:
+```html id="hmq9h7"
+<p id="demo" class="text highlight">
+hiển thị màu:
+```text id="0ys8ih"
+black
+Vì rule:
+```css id="snn1m3"
+p#demo.text.highlight
+có specificity cao nhất:
+`text id="yqtrcq"
+1,2,1
+nên thắng tất cả các rule còn lại.
+Nếu đổi thứ tự các rules thì sao?
+ Nếu specificity khác nhau
+Kết quả:
+```text id="5z4x8v"
+Không đổi
+Vì specificity cao hơn luôn được ưu tiên.
+Nếu specificity bằng nhau
+Kết quả:
+```text id="gx4fso"
+Rule viết sau sẽ thắng
+do CSS ưu tiên rule xuất hiện cuối cùng khi specificity bằng nhau.
+.
