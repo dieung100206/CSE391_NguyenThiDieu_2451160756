@@ -1,0 +1,58 @@
+# CSS Position
+| Position | Vẫn chiếm chỗ trong flow? | Tham chiếu vị trí                              | Cuộn theo trang? | Use case                                      |
+| -------- | ------------------------- | ---------------------------------------------- | ---------------- | --------------------------------------------- |
+| static   | Có                        | Theo flow bình thường                          | Có               | Layout mặc định                               |
+| relative | Có                        | So với vị trí ban đầu của chính nó             | Có               | Dịch chuyển nhẹ phần tử, làm mốc cho absolute |
+| absolute | Không                     | Theo ancestor gần nhất có position khác static | Có               | Popup, badge, icon, menu                      |
+| fixed    | Không                     | Theo viewport (màn hình trình duyệt)           | Không            | Nút chat, menu cố định                        |
+| sticky   | Có                        | Theo flow ban đầu rồi dính theo viewport       | Một phần         | Header dính khi cuộn                          |
+---
+# Giải thích thêm
+## Khi nào absolute tham chiếu body?
+Khi phần tử cha KHÔNG có:
+```css id="k97zsi"
+position: relative;
+position: absolute;
+position: fixed;
+position: sticky;
+```
+tức là tất cả ancestor đều là:
+```css id="ep8p1j"
+position: static;
+```
+thì absolute sẽ tham chiếu tới body (hoặc viewport).
+---
+# Khi nào absolute tham chiếu parent?
+Khi parent gần nhất có:
+```css id="ok5ijq"
+position: relative;
+```
+hoặc:
+* absolute
+* fixed
+* sticky
+thì absolute sẽ định vị theo parent đó.
+# Nearest Positioned Ancestor
+Khái niệm:
+```text id="d73wuk"
+Ancestor gần nhất có position khác static
+``
+Ancestor đó sẽ trở thành mốc tọa độ cho phần tử absolute.
+---
+# Ví dụ
+```html id="wtv7ee"
+<div class="parent">
+    <div class="child"></div>
+</div>
+```
+```css id="jq79y0"
+.parent {
+    position: relative;
+}
+.child {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+``
+`.child` sẽ bám theo `.parent` vì `.parent` là nearest positioned ancestor.
