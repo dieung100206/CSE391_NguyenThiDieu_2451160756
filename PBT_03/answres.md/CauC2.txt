@@ -1,0 +1,86 @@
+Phân tích Cascade + Inheritance
+1. "Sản phẩm A" (h2)
+Font-size = 20px
+Do áp dụng:
+```css
+.card .title {
+    font-size: 20px;
+}
+```Color = green
+Các rule liên quan:
+```css
+.card {
+    color: blue;
+}
+```
+```css
+#featured .title {
+    color: red;
+}
+``
+```css
+.highlight {
+    color: green !important;
+}
+```
+`.highlight` có `!important` nên ưu tiên cao nhất.
+Kết quả:
+```text
+color = green
+``2. "Mô tả sản phẩm" (p trong featured)
+```css
+.card p {
+    color: inherit;
+}
+```
+`inherit` lấy màu từ phần tử cha `.card`
+```css
+.card {
+    color: blue;
+}
+```
+Kết quả:
+```text
+color = blue
+```
+3. "Sản phẩm B" (h2)
+Font-size = 20px
+Do:
+```css
+.card .title {
+    font-size: 20px;
+}
+```
+Color = blue
+Không có:
+* `.highlight`
+* `#featured`
+Nên kế thừa từ `.card`
+```css
+.card {
+    color: blue;
+}
+``
+Kết quả:
+```text
+color = blue
+``
+ 4. "Mô tả sản phẩm B" (p.highlight)
+Có:
+```css
+.highlight {
+    color: green !important;
+}
+```
+`!important` ưu tiên cao nhất.
+Kết quả:
+```text
+color = green
+``
+# Tóm tắt
+| Phần tử          | Font-size | Color |
+| ---------------- | --------- | ----- |
+| Sản phẩm A       | 20px      | green |
+| Mô tả sản phẩm   | mặc định  | blue  |
+| Sản phẩm B       | 20px      | blue  |
+| Mô tả sản phẩm B | mặc định  | green |
