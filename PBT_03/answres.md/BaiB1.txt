@@ -1,0 +1,6 @@
+Các loại selector đã sử dụng:
+1. Element selector: body, table, footer
+2. Class selector: .active, .info
+3. ID selector: #top
+4. Descendant selector: nav a, table th
+5. Pseudo-class selector: :hover, :nth-child(even)
