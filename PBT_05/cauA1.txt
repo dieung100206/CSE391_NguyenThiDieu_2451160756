@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Thẻ meta viewport chuẩn -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meta Viewport - Mobile First - Desktop First</title>
+
+    <style>
+        /* =====================================================
+           MOBILE-FIRST
+           ===================================================== */
+
+        /*
+            Mobile-First:
+            - Viết CSS cho điện thoại trước
+            - Sau đó dùng min-width để mở rộng cho màn hình lớn hơn
+        */
+
+        .mobile-first {
+            background-color: lightblue;
+            padding: 20px;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        /* Từ 768px trở lên */
+        @media (min-width: 768px) {
+            .mobile-first {
+                background-color: lightgreen;
+                font-size: 22px;
+            }
+        }
+
+
+        /* =====================================================
+           DESKTOP-FIRST
+           ===================================================== */
+
+        /*
+            Desktop-First:
+            - Viết CSS cho máy tính trước
+            - Sau đó dùng max-width để chỉnh cho màn hình nhỏ hơn
+        */
+
+        .desktop-first {
+            background-color: pink;
+            padding: 20px;
+            font-size: 22px;
+        }
+
+        /* Từ 768px trở xuống */
+        @media (max-width: 768px) {
+            .desktop-first {
+                background-color: orange;
+                font-size: 16px;
+            }
+        }
+
+        body{
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        h1{
+            color: darkblue;
+        }
+
+        h2{
+            color: darkred;
+        }
+
+        .box{
+            border: 2px solid black;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>THẺ META VIEWPORT VÀ RESPONSIVE WEB DESIGN</h1>
+
+    <hr>
+
+    <h2>1. Thẻ meta viewport chuẩn</h2>
+
+    <p>
+        Thẻ meta viewport chuẩn:
+    </p>
+
+    <pre>
+&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    </pre>
+
+    <h2>2. Giải thích từng thuộc tính</h2>
+
+    <p>
+        <b>name="viewport"</b><br>
+        Khai báo vùng hiển thị (viewport) của trang web trên thiết bị di động.
+    </p>
+
+    <p>
+        <b>width=device-width</b><br>
+        Đặt chiều rộng trang web bằng đúng chiều rộng màn hình thiết bị.
+    </p>
+
+    <p>
+        <b>initial-scale=1.0</b><br>
+        Đặt mức zoom ban đầu là 100% khi mở trang web.
+    </p>
+
+    <hr>
+
+    <h2>3. Nếu thiếu thẻ meta viewport thì iPhone hiển thị như thế nào?</h2>
+
+    <p>
+        Nếu thiếu thẻ meta viewport, iPhone sẽ:
+    </p>
+
+    <ul>
+    <li>Hiển thị trang web theo kích thước desktop mặc định.</li>
+        <li>Trang web bị thu nhỏ toàn bộ để vừa màn hình điện thoại.</li>
+        <li>Chữ rất nhỏ, khó đọc.</li>
+        <li>Người dùng phải zoom tay để xem nội dung.</li>
+        <li>Responsive layout hoạt động không đúng.</li>
+    </ul>
+
+    <hr>
+
+    <h2>4. Mobile-First và Desktop-First khác nhau thế nào?</h2>
+
+    <table border="1" cellpadding="10" cellspacing="0">
+        <tr>
+            <th>Mobile-First</th>
+            <th>Desktop-First</th>
+        </tr>
+
+        <tr>
+            <td>Thiết kế cho điện thoại trước</td>
+            <td>Thiết kế cho máy tính trước</td>
+        </tr>
+
+        <tr>
+            <td>Dùng media query min-width</td>
+            <td>Dùng media query max-width</td>
+        </tr>
+
+        <tr>
+            <td>Mở rộng dần cho màn hình lớn</td>
+            <td>Thu nhỏ dần cho màn hình nhỏ</td>
+        </tr>
+
+        <tr>
+            <td>Tối ưu hiệu năng mobile tốt hơn</td>
+            <td>Dễ dư CSS khi responsive</td>
+        </tr>
+    </table>
+
+    <hr>
+
+    <h2>5. Ví dụ CSS Mobile-First (breakpoint 768px)</h2>
+
+    <div class="mobile-first box">
+        Đây là ví dụ Mobile-First
+    </div>
+
+    <pre>
+.mobile-first{
+    font-size:16px;
+}
+
+/* Từ 768px trở lên */
+@media (min-width:768px){
+    .mobile-first{
+        font-size:22px;
+    }
+}
+    </pre>
+
+    <hr>
+
+    <h2>6. Ví dụ CSS Desktop-First (breakpoint 768px)</h2>
+
+    <div class="desktop-first box">
+        Đây là ví dụ Desktop-First
+    </div>
+
+    <pre>
+.desktop-first{
+    font-size:22px;
+}
+
+/* Từ 768px trở xuống */
+@media (max-width:768px){
+    .desktop-first{
+        font-size:16px;
+    }
+}
+    </pre>
+
+    <hr>
+
+    <h2>7. Tại sao Mobile-First được khuyên dùng?</h2>
+
+    <ul>
+        <li>Hiện nay người dùng điện thoại chiếm đa số.</li>
+        <li>Website tải nhanh hơn trên mobile.</li>
+        <li>Code gọn và dễ tối ưu hơn.</li>
+        <li>Dễ mở rộng lên tablet và desktop.</li>
+        <li>Google ưu tiên Mobile-First Indexing.</li>
+        <li>Trải nghiệm người dùng trên điện thoại tốt hơn.</li>
+    </ul>
+
+</body>
+</html>
