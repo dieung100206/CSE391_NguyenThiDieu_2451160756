@@ -1,0 +1,255 @@
+/*
+===========================================
+DỰ ĐOÁN KẾT QUẢ
+===========================================
+*/
+
+console.log(typeof null);         // "object"
+console.log(typeof undefined);    // "undefined"
+console.log(typeof NaN);          // "number"
+
+console.log("5" + 3);            // "53"
+console.log("5" - 3);            // 2
+console.log("5" * "3");          // 15
+
+console.log(true + true);        // 2
+
+console.log([] + []);            // ""
+console.log([] + {});            // "[object Object]"
+console.log({} + []);            // "[object Object]"
+
+
+/*
+===========================================
+GIẢI THÍCH
+===========================================
+*/
+
+/*
+1. typeof null
+
+Kết quả:
+"object"
+
+Đây là lỗi lịch sử của JavaScript
+được giữ lại để tương thích.
+
+Nhiều người nghĩ phải là:
+
+"null"
+
+nhưng thực tế là:
+
+"object"
+*/
+
+
+/*
+2. typeof undefined
+
+Kết quả:
+"undefined"
+
+undefined là một kiểu dữ liệu riêng.
+*/
+
+
+/*
+3. typeof NaN
+
+Kết quả:
+"number"
+
+NaN = Not a Number
+
+Nhưng JavaScript vẫn xếp NaN
+vào nhóm Number.
+*/
+
+
+/*
+4. "5" + 3
+
+Kết quả:
+"53"
+
+Toán tử +
+
+nếu có một toán hạng là String
+
+=> JavaScript ưu tiên nối chuỗi
+
+"5" + "3"
+
+=> "53"
+*/
+
+
+/*
+5. "5" - 3
+
+Kết quả:
+2
+
+Toán tử -
+
+KHÔNG hỗ trợ nối chuỗi
+
+JavaScript buộc phải chuyển:
+
+"5" => 5
+
+5 - 3
+
+=> 2
+*/
+
+
+/*
+6. "5" * "3"
+
+Kết quả:
+15
+
+Toán tử *
+
+ép kiểu sang Number
+
+5 * 3
+
+=> 15
+*/
+
+
+/*
+7. true + true
+
+Kết quả:
+2
+
+true => 1
+
+1 + 1
+
+=> 2
+*/
+
+
+/*
+8. [] + []
+
+Kết quả:
+""
+
+Array rỗng chuyển thành:
+
+""
+
+=> "" + ""
+
+=> ""
+*/
+
+
+/*
+9. [] + {}
+
+Kết quả:
+"[object Object]"
+
+[] => ""
+
+{} => "[object Object]"
+
+=> "" + "[object Object]"
+
+=> "[object Object]"
+*/
+
+
+/*
+10. {} + []
+
+Kết quả:
+"[object Object]"
+
+{} => "[object Object]"
+
+[] => ""
+
+=> "[object Object]"
+*/
+
+
+/*
+===========================================
+TẠI SAO "5" + 3 VÀ "5" - 3 KHÁC NHAU?
+===========================================
+
+"5" + 3
+
+Toán tử + có hai chức năng:
+
+1. Cộng số
+2. Nối chuỗi
+
+Khi gặp String:
+
+"5" + 3
+
+JavaScript chọn nối chuỗi:
+
+=> "53"
+
+
+-------------------------------------------
+
+"5" - 3
+
+Toán tử - chỉ có chức năng:
+
+Trừ số
+
+Nên JavaScript phải ép kiểu:
+
+"5" => 5
+
+5 - 3
+
+=> 2
+
+-------------------------------------------
+
+Ví dụ:
+
+"10" + 5  => "105"
+
+"10" - 5  => 5
+
+"10" * 5  => 50
+
+"10" / 5  => 2
+*/
+
+
+/*
+===========================================
+KẾT QUẢ CUỐI CÙNG
+===========================================
+
+typeof null         => "object"
+typeof undefined    => "undefined"
+typeof NaN          => "number"
+
+"5" + 3             => "53"
+"5" - 3             => 2
+"5" * "3"           => 15
+
+true + true         => 2
+
+[] + []             => ""
+[] + {}             => "[object Object]"
+{} + []             => "[object Object]"
+
+===========================================
+*/
