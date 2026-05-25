@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phân tích Media Query Container Width</title>
+</head>
+<body>
+
+    <h1>Bài tập: Xác định chiều rộng của .container</h1>
+
+    <h2>Đoạn CSS đã cho</h2>
+
+    <pre>
+.container {
+    width: 100%;
+    padding: 10px;
+}
+
+@media (min-width: 576px) {
+    .container {
+        width: 540px;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 720px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        width: 960px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1140px;
+    }
+}
+    </pre>
+
+    <h2>Bảng kết quả</h2>
+
+    <table border="1" cellpadding="8" cellspacing="0">
+        <tr>
+            <th>Chiều rộng màn hình</th>
+            <th>.container width</th>
+        </tr>
+        <tr>
+            <td>375px (iPhone SE)</td>
+            <td>100% (≈ 375px)</td>
+        </tr>
+        <tr>
+            <td>600px</td>
+            <td>540px</td>
+        </tr>
+        <tr>
+            <td>800px</td>
+            <td>720px</td>
+        </tr>
+        <tr>
+            <td>1000px</td>
+            <td>960px</td>
+        </tr>
+        <tr>
+            <td>1400px</td>
+            <td>1140px</td>
+        </tr>
+    </table>
+
+    <h2>Giải thích</h2>
+
+    <ul>
+        <li>375px nhỏ hơn 576px nên không áp dụng media query nào → width = 100%.</li>
+        <li>600px lớn hơn hoặc bằng 576px → width = 540px.</li>
+        <li>800px lớn hơn hoặc bằng 768px → width = 720px.</li>
+        <li>1000px lớn hơn hoặc bằng 992px → width = 960px.</li>
+        <li>1400px lớn hơn hoặc bằng 1200px → width = 1140px.</li>
+    </ul>
+
+    <h2>Kết luận</h2>
+
+    <p>
+        Trong CSS Responsive, khi nhiều media query cùng thỏa mãn điều kiện,
+        quy tắc được khai báo sau cùng sẽ được áp dụng. Vì vậy chiều rộng của
+        .container thay đổi theo từng breakpoint đã định nghĩa.
+    </p>
+
+</body>
+</html>
