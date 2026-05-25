@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tìm hiểu SCSS</title>
+</head>
+<body>
+
+    <h1>4 Tính Năng Chính Của SCSS</h1>
+
+    <p>
+        SCSS (Sassy CSS) là một CSS Preprocessor giúp viết CSS nhanh hơn,
+        dễ bảo trì hơn và có nhiều tính năng mà CSS thông thường không có.
+    </p>
+
+    <hr>
+
+    <h2>1. Variables (Biến)</h2>
+
+    <p>
+        Variables cho phép lưu trữ giá trị vào biến để tái sử dụng nhiều lần.
+        Khi cần thay đổi màu sắc hoặc kích thước, chỉ cần sửa một nơi.
+    </p>
+
+    <h3>Ví dụ:</h3>
+
+    <pre>
+$primary-color: blue;
+
+h1 {
+    color: $primary-color;
+}
+
+button {
+    background-color: $primary-color;
+}
+    </pre>
+
+    <p>
+        Trong ví dụ trên, cả tiêu đề và nút bấm đều sử dụng cùng một màu được lưu trong biến <strong>$primary-color</strong>.
+    </p>
+
+    <hr>
+
+    <h2>2. Nesting (Lồng CSS)</h2>
+
+    <p>
+        Nesting cho phép viết các selector lồng nhau giống cấu trúc HTML,
+        giúp mã nguồn dễ đọc hơn.
+    </p>
+
+    <h3>Ví dụ:</h3>
+
+    <pre>
+nav {
+    background: black;
+
+    ul {
+        list-style: none;
+    }
+
+    li {
+        display: inline-block;
+    }
+
+    a {
+        color: white;
+    }
+}
+    </pre>
+
+    <p>
+        Khi biên dịch sang CSS sẽ tạo ra:
+    </p>
+
+    <pre>
+nav ul { ... }
+nav li { ... }
+nav a { ... }
+    </pre>
+
+    <hr>
+
+    <h2>3. Mixins (@mixin và @include)</h2>
+
+    <p>
+        Mixins cho phép tạo một nhóm thuộc tính CSS dùng lại nhiều lần,
+        tương tự như hàm trong lập trình.
+    </p>
+
+    <h3>Ví dụ:</h3>
+
+    <pre>
+@mixin button-style {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+.btn-primary {
+    @include button-style;
+    background: blue;
+}
+
+.btn-success {
+    @include button-style;
+    background: green;
+}
+    </pre>
+
+    <p>
+        Nhờ đó không cần viết lặp lại các thuộc tính chung cho nhiều nút bấm.
+    </p>
+
+    <hr>
+
+    <h2>4. @extend / Inheritance (Kế thừa)</h2>
+
+    <p>
+        @extend cho phép một class kế thừa thuộc tính của class khác,
+        giúp giảm việc lặp lại mã nguồn.
+    </p>
+
+    <h3>Ví dụ:</h3>
+
+    <pre>
+.message {
+    padding: 10px;
+    border: 1px solid gray;
+}
+
+.success {
+    @extend .message;
+    color: green;
+}
+    </pre>
+
+    <p>
+        Class <strong>.success</strong> sẽ tự động có các thuộc tính của
+        <strong>.message</strong> và bổ sung thêm màu chữ xanh.
+    </p>
+
+    <hr>
+
+    <h2>Tại Sao Trình Duyệt Không Đọc Được File .scss?</h2>
+
+    <p>
+        Trình duyệt chỉ hiểu CSS chuẩn. Các cú pháp như:
+    </p>
+
+    <ul>
+        <li>Variables ($variable)</li>
+        <li>Nesting</li>
+        <li>Mixins</li>
+        <li>@extend</li>
+    </ul>
+
+    <p>
+        đều là cú pháp riêng của SCSS nên trình duyệt không thể xử lý trực tiếp file .scss.
+    </p>
+
+    <hr>
+
+    <h2>Chuyển SCSS Thành CSS</h2>
+
+    <p>
+        Trước khi chạy trên trình duyệt, file SCSS phải được biên dịch
+        (compile) thành file CSS.
+    </p>
+
+    <h3>Ví dụ:</h3>
+
+    <pre>
+style.scss
+      ↓
+Biên dịch (Compile)
+      ↓
+style.css
+    </pre>
+
+    <p>
+        Có thể biên dịch bằng Sass CLI, VS Code Extension hoặc các công cụ build như Webpack, Vite,...
+    </p>
+
+    <h3>Lệnh Sass:</h3>
+
+    <pre>
+sass style.scss style.css
+    </pre>
+
+    <p>
+        Sau khi biên dịch, trình duyệt sẽ đọc file <strong>style.css</strong>
+        thay vì file <strong>style.scss</strong>.
+    </p>
+
+</body>
+</html>    
