@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phân Tích Bootstrap Grid System</title>
+</head>
+<body>
+
+    <h1>Phân Tích Bootstrap Grid System</h1>
+
+    <h2>Đoạn HTML Đề Bài</h2>
+
+    <pre>
+&lt;div class="container"&gt;
+    &lt;div class="row"&gt;
+        &lt;div class="col-12 col-md-6 col-lg-3"&gt;Box 1&lt;/div&gt;
+        &lt;div class="col-12 col-md-6 col-lg-3"&gt;Box 2&lt;/div&gt;
+        &lt;div class="col-12 col-md-6 col-lg-3"&gt;Box 3&lt;/div&gt;
+        &lt;div class="col-12 col-md-6 col-lg-3"&gt;Box 4&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+    </pre>
+
+    <h2>Bảng Kết Quả</h2>
+
+    <table border="1" cellpadding="10" cellspacing="0">
+        <tr>
+            <th>Kích thước màn hình</th>
+            <th>&lt; 768px</th>
+            <th>768px - 991px</th>
+            <th>≥ 992px</th>
+        </tr>
+        <tr>
+            <td>Số cột</td>
+            <td>1 cột</td>
+            <td>2 cột</td>
+            <td>4 cột</td>
+        </tr>
+        <tr>
+            <td>Box layout</td>
+            <td>4 hàng</td>
+            <td>2 hàng × 2 cột</td>
+            <td>1 hàng × 4 cột</td>
+        </tr>
+    </table>
+
+    <hr>
+
+    <h2>Layout Mobile (&lt;768px)</h2>
+
+    <p>
+        Class <strong>col-12</strong> được áp dụng.
+        Mỗi box chiếm toàn bộ chiều rộng hàng (12/12 cột).
+    </p>
+
+    <pre>
+┌─────────────┐
+│   Box 1     │
+├─────────────┤
+│   Box 2     │
+├─────────────┤
+│   Box 3     │
+├─────────────┤
+│   Box 4     │
+└─────────────┘
+    </pre>
+
+    <p><strong>Kết quả:</strong> 1 cột, 4 hàng.</p>
+
+    <hr>
+
+    <h2>Layout Tablet (768px - 991px)</h2>
+
+    <p>
+        Class <strong>col-md-6</strong> được áp dụng.
+        Mỗi box chiếm 6/12 cột = 50% chiều rộng.
+    </p>
+
+    <pre>
+┌─────────┬─────────┐
+│ Box 1   │ Box 2   │
+├─────────┼─────────┤
+│ Box 3   │ Box 4   │
+└─────────┴─────────┘
+    </pre>
+
+    <p><strong>Kết quả:</strong> 2 cột, 2 hàng.</p>
+
+    <hr>
+
+    <h2>Layout Desktop (≥992px)</h2>
+
+    <p>
+        Class <strong>col-lg-3</strong> được áp dụng.
+        Mỗi box chiếm 3/12 cột = 25% chiều rộng.
+    </p>
+
+    <pre>
+┌──────┬──────┬──────┬──────┐
+│Box 1 │Box 2 │Box 3 │Box 4 │
+└──────┴──────┴──────┴──────┘
+    </pre>
+
+    <p><strong>Kết quả:</strong> 4 cột trên cùng một hàng.</p>
+
+    <hr>
+
+    <h2>Câu Hỏi Thêm</h2>
+
+    <h3>1. col-md-6 nghĩa là gì?</h3>
+
+    <p>
+    <strong>md</strong> là breakpoint Medium (≥768px).
+    </p>
+
+    <p>
+        <strong>6</strong> nghĩa là phần tử chiếm 6 trên tổng 12 cột của Bootstrap Grid.
+    </p>
+
+    <pre>
+6 / 12 = 50%
+    </pre>
+
+    <p>
+        Vì vậy mỗi box rộng bằng một nửa hàng.
+    </p>
+
+    <h3>2. Tại sao không cần viết col-sm-12?</h3>
+
+    <p>
+        Bootstrap sử dụng nguyên tắc Mobile-First.
+    </p>
+
+    <p>
+        Khi khai báo:
+    </p>
+
+    <pre>
+col-12
+    </pre>
+
+    <p>
+        Giá trị này tự động áp dụng cho mọi kích thước màn hình nhỏ cho đến khi bị một breakpoint lớn hơn ghi đè.
+    </p>
+
+    <p>
+        Ví dụ:
+    </p>
+
+    <pre>
+col-12 col-md-6 col-lg-3
+    </pre>
+
+    <p>
+        Được hiểu là:
+    </p>
+
+    <pre>
+&lt;768px      → 12/12
+≥768px      → 6/12
+≥992px      → 3/12
+    </pre>
+
+    <p>
+        Do đó không cần viết:
+    </p>
+
+    <pre>
+col-sm-12
+    </pre>
+
+    <p>
+        vì <strong>col-12</strong> đã đảm nhiệm chức năng đó rồi.
+    </p>
+
+    <hr>
+
+    <h2>Kết Luận</h2>
+
+    <table border="1" cellpadding="10" cellspacing="0">
+        <tr>
+            <th>Breakpoint</th>
+            <th>Class áp dụng</th>
+            <th>Độ rộng mỗi Box</th>
+            <th>Kết quả</th>
+        </tr>
+        <tr>
+            <td>&lt;768px</td>
+            <td>col-12</td>
+            <td>100%</td>
+            <td>1 cột</td>
+        </tr>
+        <tr>
+            <td>768px - 991px</td>
+            <td>col-md-6</td>
+            <td>50%</td>
+            <td>2 cột</td>
+        </tr>
+        <tr>
+            <td>≥992px</td>
+            <td>col-lg-3</td>
+            <td>25%</td>
+            <td>4 cột</td>
+        </tr>
+    </table>
+
+    <p>
+        Layout thay đổi từ <strong>1 cột → 2 cột → 4 cột</strong>
+        khi kích thước màn hình tăng lên.
+    </p>
+
+</body>
+</html>
