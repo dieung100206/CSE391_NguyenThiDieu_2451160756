@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breakpoints Chuẩn Bootstrap</title>
+</head>
+<body>
+
+    <h1>Breakpoints Chuẩn Trong Bootstrap 5</h1>
+
+    <p>
+        Breakpoint là các mốc kích thước màn hình được sử dụng trong Responsive Web Design
+        để thay đổi cách hiển thị giao diện trên các thiết bị khác nhau.
+    </p>
+
+    <table border="1" cellpadding="8" cellspacing="0">
+        <tr>
+            <th>Breakpoint</th>
+            <th>Kích thước Pixel</th>
+            <th>Thiết Bị Đại Diện</th>
+            <th>Số Cột Sản Phẩm Gợi Ý</th>
+        </tr>
+
+        <tr>
+            <td>Extra Small (xs)</td>
+            <td>&lt; 576px</td>
+            <td>Điện thoại nhỏ</td>
+            <td>1 cột</td>
+        </tr>
+
+        <tr>
+            <td>Small (sm)</td>
+            <td>≥ 576px</td>
+            <td>Điện thoại lớn</td>
+            <td>2 cột</td>
+        </tr>
+
+        <tr>
+            <td>Medium (md)</td>
+            <td>≥ 768px</td>
+            <td>Máy tính bảng (Tablet)</td>
+            <td>3 cột</td>
+        </tr>
+
+        <tr>
+            <td>Large (lg)</td>
+            <td>≥ 992px</td>
+            <td>Laptop</td>
+            <td>4 cột</td>
+        </tr>
+
+        <tr>
+            <td>Extra Large (xl)</td>
+            <td>≥ 1200px</td>
+            <td>Desktop</td>
+            <td>5 cột</td>
+        </tr>
+
+        <tr>
+            <td>Extra Extra Large (xxl)</td>
+            <td>≥ 1400px</td>
+            <td>Màn hình lớn</td>
+            <td>6 cột</td>
+        </tr>
+    </table>
+
+    <h2>Ví dụ bố cục lưới sản phẩm</h2>
+
+    <ul>
+        <li>Điện thoại nhỏ (&lt;576px): 1 cột sản phẩm.</li>
+        <li>Điện thoại lớn (≥576px): 2 cột sản phẩm.</li>
+        <li>Máy tính bảng (≥768px): 3 cột sản phẩm.</li>
+        <li>Laptop (≥992px): 4 cột sản phẩm.</li>
+        <li>Desktop (≥1200px): 5 cột sản phẩm.</li>
+        <li>Màn hình rất lớn (≥1400px): 6 cột sản phẩm.</li>
+    </ul>
+
+    <h2>Kết luận</h2>
+
+    <p>
+        Việc sử dụng breakpoints giúp giao diện thích nghi với nhiều kích thước màn hình khác nhau,
+        nâng cao trải nghiệm người dùng trên điện thoại, máy tính bảng và máy tính.
+    </p>
+
+</body>
+</html>
