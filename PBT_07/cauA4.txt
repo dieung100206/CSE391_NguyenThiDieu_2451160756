@@ -1,0 +1,167 @@
+/*
+===========================================
+TẤT CẢ GIÁ TRỊ FALSY TRONG JAVASCRIPT
+===========================================
+*/
+
+false
+0
+-0
+0n          // BigInt zero
+""          // chuỗi rỗng
+''
+``
+null
+undefined
+NaN
+
+/*
+Ngoài các giá trị trên,
+mọi giá trị khác đều là Truthy.
+*/
+
+
+/*
+===========================================
+DỰ ĐOÁN KẾT QUẢ
+===========================================
+*/
+
+if ("0") console.log("A");
+if ("") console.log("B");
+if ([]) console.log("C");
+if ({}) console.log("D");
+if (null) console.log("E");
+if (0) console.log("F");
+if (-1) console.log("G");
+if (" ") console.log("H");
+
+
+/*
+===========================================
+PHÂN TÍCH TỪNG DÒNG
+===========================================
+*/
+
+
+/*
+1.
+if ("0")
+
+"0" là chuỗi chứa ký tự 0
+KHÔNG phải chuỗi rỗng
+
+=> Truthy
+
+In:
+A
+*/
+
+
+/*
+2.
+if ("")
+
+Chuỗi rỗng
+
+=> Falsy
+
+Không in
+*/
+
+
+/*
+3.
+if ([])
+
+Array rỗng
+
+=> Truthy
+
+In:
+C
+*/
+
+
+/*
+4.
+if ({})
+
+Object rỗng
+
+=> Truthy
+
+In:
+D
+*/
+
+
+/*
+5.
+if (null)
+
+null là Falsy
+
+Không in
+*/
+
+
+/*
+6.
+if (0)
+
+0 là Falsy
+
+Không in
+*/
+
+
+/*
+7.
+if (-1)
+
+-1 khác 0
+
+=> Truthy
+
+In:
+G
+*/
+
+
+/*
+8.
+if (" ")
+
+Đây KHÔNG phải chuỗi rỗng
+
+Nó chứa 1 ký tự khoảng trắng
+
+=> Truthy
+
+In:
+H
+*/
+
+
+/*
+===========================================
+KẾT QUẢ CUỐI CÙNG
+===========================================
+
+A
+C
+D
+G
+H
+
+===========================================
+KHÔNG IN
+===========================================
+
+B
+E
+F
+
+===========================================
+*/

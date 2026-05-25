@@ -1,0 +1,87 @@
+/*
+===========================================
+CÁCH 1
+===========================================
+*/
+
+// Trước
+
+var greeting =
+    "Xin chào " + name +
+    "! Bạn " + age +
+    " tuổi.";
+
+// Sau (Template Literal)
+
+var greeting = `Xin chào ${name}! Bạn ${age} tuổi.`;
+
+
+/*
+===========================================
+CÁCH 2
+===========================================
+*/
+
+// Trước
+
+var url =
+    "https://api.example.com/users/" +
+    userId +
+    "/orders?page=" +
+    page;
+
+// Sau (Template Literal)
+
+var url = `https://api.example.com/users/${userId}/orders?page=${page}`;
+
+
+/*
+===========================================
+CÁCH 3
+===========================================
+*/
+
+// Trước
+
+var html =
+    "<div class=\"card\">" +
+    "<h2>" + title + "</h2>" +
+    "<p>" + description + "</p>" +
+    "<span>Giá: " + price + "đ</span>" +
+    "</div>";
+
+
+// Sau (Template Literal)
+
+var html = `
+<div class="card">
+    <h2>${title}</h2>
+    <p>${description}</p>
+    <span>Giá: ${price}đ</span>
+</div>
+`;
+
+
+/*
+===========================================
+ƯU ĐIỂM CỦA TEMPLATE LITERAL
+===========================================
+
+1. Dễ đọc hơn.
+2. Không cần dùng dấu + để nối chuỗi.
+3. Chèn biến bằng ${}.
+4. Hỗ trợ chuỗi nhiều dòng.
+5. Rất tiện khi tạo HTML động.
+
+Ví dụ:
+
+let name = "Diệu";
+let age = 20;
+
+console.log(`Xin chào ${name}, bạn ${age} tuổi.`);
+
+Kết quả:
+
+Xin chào Diệu, bạn 20 tuổi.
+===========================================
+*/

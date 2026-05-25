@@ -1,0 +1,249 @@
+/*
+=================================================
+BÀI TẬP: TÌM VÀ SỬA LỖI TRONG CODE JAVASCRIPT
+=================================================
+
+Code gốc:
+
+function tinhGiaGiamGia(giaBan, phanTramGiam) {
+    if (phanTramGiam < 0 || phanTramGiam > 100) {
+        return "Phần trăm giảm không hợp lệ"
+    }
+
+    var giamGia = giaBan * phanTramGiam / 100
+    let giaSauGiam = giaBan - giamGia
+
+    if (giaSauGiam = 0) {
+        console.log("Sản phẩm miễn phí!")
+    }
+
+    return giaSauGiam
+}
+
+// Test
+const gia = tinhGiaGiamGia("100000", 20)
+console.log("Giá sau giảm: " + gia + "đ")
+
+const gia2 = tinhGiaGiamGia(50000, 110)
+console.log("Giá: " + gia2)
+
+for (var i = 0; i < 5; i++) {
+    setTimeout(function() {
+        console.log("Item " + i)
+    }, 1000)
+}
+
+=================================================
+PHÂN TÍCH LỖI
+=================================================
+
+Lỗi 1:
+Thiếu dấu ;
+
+Ví dụ:
+
+return "Phần trăm giảm không hợp lệ"
+
+Nên viết:
+
+return "Phần trăm giảm không hợp lệ";
+
+-------------------------------------------------
+
+Lỗi 2:
+Truyền chuỗi thay vì số
+
+const gia = tinhGiaGiamGia("100000", 20);
+
+"100000" là String.
+
+Nên sửa:
+
+const gia = tinhGiaGiamGia(100000, 20);
+
+-------------------------------------------------
+
+Lỗi 3:
+Dùng dấu = thay vì ===
+
+Sai:
+
+if (giaSauGiam = 0)
+
+Đây là phép gán.
+
+Đúng:
+
+if (giaSauGiam === 0)
+
+-------------------------------------------------
+
+Lỗi 4:
+Không kiểm tra dữ liệu đầu vào
+
+Ví dụ:
+
+tinhGiaGiamGia("abc", 20);
+
+Kết quả sẽ là NaN.
+
+Nên dùng:
+
+isNaN()
+
+để kiểm tra.
+
+-------------------------------------------------
+
+Lỗi 5:
+Dùng var không cần thiết
+
+Sai:
+
+var giamGia = ...
+
+Nên dùng:
+
+const giamGia = ...
+
+vì giá trị không thay đổi.
+
+-------------------------------------------------
+
+Lỗi 6:
+Hàm trả về nhiều kiểu dữ liệu
+
+Khi lỗi:
+
+return "Phần trăm giảm không hợp lệ";
+
+Khi đúng:
+
+return giaSauGiam;
+
+Lúc trả String, lúc trả Number.
+
+Điều này không tốt.
+
+-------------------------------------------------
+
+Lỗi 7 (LỖI ẨN):
+var trong vòng lặp
+
+for (var i = 0; i < 5; i++) {
+    setTimeout(...)
+}
+
+Kết quả thực tế:
+
+Item 5
+Item 5
+Item 5
+Item 5
+Item 5
+
+Tại sao?
+
+var có Function Scope.
+
+Sau khi vòng lặp kết thúc:
+
+i = 5
+
+1 giây sau callback mới chạy.
+
+Tất cả callback đều dùng chung biến i.
+
+-------------------------------------------------
+
+Cách sửa:
+
+for (let i = 0; i < 5; i++) {
+    setTimeout(function () {
+        console.log("Item " + i);
+    }, 1000);
+}
+
+Kết quả:
+
+Item 0
+Item 1
+Item 2
+Item 3
+Item 4
+
+Vì let có Block Scope.
+
+Mỗi vòng lặp tạo ra một biến i riêng.
+
+=================================================
+PHIÊN BẢN ĐÃ SỬA
+=================================================
+*/
+
+function tinhGiaGiamGia(giaBan, phanTramGiam) {
+
+    giaBan = Number(giaBan);
+phanTramGiam = Number(phanTramGiam);
+
+    if (isNaN(giaBan) || isNaN(phanTramGiam)) {
+        return "Dữ liệu không hợp lệ";
+    }
+
+    if (phanTramGiam < 0 || phanTramGiam > 100) {
+        return "Phần trăm giảm không hợp lệ";
+    }
+
+    const giamGia = giaBan * phanTramGiam / 100;
+    const giaSauGiam = giaBan - giamGia;
+
+    if (giaSauGiam === 0) {
+        console.log("Sản phẩm miễn phí!");
+    }
+
+    return giaSauGiam;
+}
+
+/*
+=================================================
+TEST
+=================================================
+*/
+
+const gia = tinhGiaGiamGia(100000, 20);
+console.log("Giá sau giảm: " + gia + "đ");
+
+const gia2 = tinhGiaGiamGia(50000, 110);
+console.log("Giá: " + gia2);
+
+for (let i = 0; i < 5; i++) {
+    setTimeout(function () {
+        console.log("Item " + i);
+    }, 1000);
+}
+
+/*
+=================================================
+KẾT LUẬN
+=================================================
+
+Các lỗi tìm được:
+
+1. Thiếu dấu ;
+2. Truyền String thay vì Number
+3. Dùng = thay vì ===
+4. Không kiểm tra dữ liệu đầu vào
+5. Dùng var thay vì const
+6. Hàm trả về nhiều kiểu dữ liệu
+7. Lỗi var trong vòng lặp setTimeout
+
+Kiến thức rút ra:
+
+- Ưu tiên dùng const và let.
+- Hạn chế dùng var.
+- Luôn dùng === thay vì ==.
+- Kiểm tra dữ liệu đầu vào.
+- Hiểu rõ Scope và Hoisting.
+- Hiểu sự khác nhau giữa var và let.
+=================================================
+*/   

@@ -1,0 +1,164 @@
+/*
+===========================================
+DỰ ĐOÁN KẾT QUẢ
+===========================================
+*/
+
+console.log(5 == "5");              // true
+console.log(5 === "5");             // false
+
+console.log(null == undefined);     // true
+console.log(null === undefined);    // false
+
+console.log(NaN == NaN);            // false
+
+console.log(0 == false);            // true
+console.log(0 === false);           // false
+
+console.log("" == false);           // true
+
+
+/*****************************************
+GIẢI THÍCH
+*****************************************/
+
+/*
+1. 5 == "5"
+
+Kết quả:
+true
+
+== chỉ so sánh giá trị.
+
+JavaScript ép kiểu:
+
+"5" => 5
+
+5 == 5
+
+=> true
+*/
+
+
+/*
+2. 5 === "5"
+
+Kết quả:
+false
+
+=== so sánh:
+
+- Giá trị
+- Kiểu dữ liệu
+
+number 5 khác string "5"
+
+=> false
+*/
+
+
+/*
+3. null == undefined
+
+Kết quả:
+true
+
+Đây là một quy tắc đặc biệt của JavaScript.
+
+null và undefined được coi là bằng nhau
+khi dùng ==
+*/
+
+
+/*
+4. null === undefined
+
+Kết quả:
+false
+
+Kiểu dữ liệu khác nhau:
+
+null      -> null
+undefined -> undefined
+
+=> false
+*/
+
+
+/*
+5. NaN == NaN
+
+Kết quả:
+false
+
+NaN là giá trị duy nhất trong JavaScript
+không bằng chính nó.
+
+Muốn kiểm tra NaN:
+
+Number.isNaN(value)
+*/
+
+
+/*
+6. 0 == false
+
+Kết quả:
+true
+
+JavaScript ép kiểu:
+
+false => 0
+
+0 == 0
+
+=> true
+*/
+
+
+/*
+7. 0 === false
+
+Kết quả:
+false
+
+number khác boolean
+
+=> false
+*/
+
+
+/*
+8. "" == false
+
+Kết quả:
+true
+
+JavaScript ép kiểu:
+
+"" => 0
+
+false => 0
+
+0 == 0
+
+=> true
+*/
+
+
+/*****************************************
+TỔNG KẾT
+*****************************************/
+
+5 == "5"               => true
+5 === "5"              => false
+
+null == undefined      => true
+null === undefined     => false
+
+NaN == NaN             => false
+
+0 == false             => true
+0 === false            => false
+
+"" == false            => true
