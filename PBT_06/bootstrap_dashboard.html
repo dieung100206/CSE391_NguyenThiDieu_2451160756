@@ -1,0 +1,204 @@
+<div class="card bg-primary text-white">
+                    <div class="card-body">
+                        <h5>Tổng đơn hàng</h5>
+                        <h2>1,250</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="card bg-success text-white">
+                    <div class="card-body">
+                        <h5>Doanh thu</h5>
+                        <h2>250M</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="card bg-warning text-dark">
+                    <div class="card-body">
+                        <h5>Sản phẩm</h5>
+                        <h2>320</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="card bg-danger text-white">
+                    <div class="card-body">
+                        <h5>Khách hàng</h5>
+                        <h2>890</h2>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ROW 2 : TABLE -->
+
+        <div class="card mb-4">
+
+            <div class="card-header">
+                Danh sách đơn hàng
+            </div>
+
+            <div class="card-body">
+
+                <div class="table-responsive">
+
+                    <table class="table table-striped table-hover">
+
+                        <thead>
+
+                            <tr>
+                                <th>Mã ĐH</th>
+                                <th>Khách hàng</th>
+                                <th>Sản phẩm</th>
+                                <th>Trạng thái</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>DH001</td>
+                                <td>Nguyễn Văn A</td>
+                                <td>Laptop</td>
+                                <td>Đã giao</td>
+                            </tr>
+
+                            <tr>
+                                <td>DH002</td>
+                                <td>Trần Thị B</td>
+                                <td>Điện thoại</td>
+                                <td>Đang xử lý</td>
+                            </tr>
+
+                            <tr>
+                                <td>DH003</td>
+                                <td>Lê Văn C</td>
+                                <td>Tai nghe</td>
+                                <td>Đã giao</td>
+                            </tr>
+
+                            <tr>
+                                <td>DH004</td>
+                                <td>Phạm Thị D</td>
+                                <td>Máy tính bảng</td>
+                                <td>Đang vận chuyển</td>
+                            </tr>
+                            </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ROW 3 : SEARCH FORM -->
+
+        <div class="card mb-4">
+
+            <div class="card-header">
+                Tìm kiếm đơn hàng
+            </div>
+
+            <div class="card-body">
+
+                <div class="row g-3">
+
+                    <div class="col-md-8">
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+                                🔍
+                            </span>
+
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="Nhập từ khóa">
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <select class="form-select">
+
+                            <option>Tất cả trạng thái</option>
+                            <option>Đã giao</option>
+                            <option>Đang xử lý</option>
+                            <option>Đang vận chuyển</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ACCORDION FAQ -->
+
+        <div class="accordion mb-4" id="faqAccordion">
+
+            <div class="accordion-item">
+
+                <h2 class="accordion-header">
+                    <button class="accordion-button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#faq1">
+                        Làm sao để thêm sản phẩm?
+                    </button>
+                </h2>
+
+                <div id="faq1"
+                     class="accordion-collapse collapse show"
+                     data-bs-parent="#faqAccordion">
+
+                    <div class="accordion-body">
+                        Vào mục Sản phẩm và chọn Thêm mới.
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="accordion-item">
+
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#faq2">
+                        Làm sao để xem báo cáo?
+                    </button>
+                </h2>
+
+                <div id="faq2"
+                     class="accordion-collapse collapse"
+                     data-bs-parent="#faqAccordion">
+
+                    <div class="accordion-body">
+                        Truy cập menu Báo cáo trên Sidebar.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
