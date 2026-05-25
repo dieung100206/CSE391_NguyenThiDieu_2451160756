@@ -1,0 +1,56 @@
+Bootstrap sẽ tự động tạo lại toàn bộ hệ thống màu liên quan.
+    </p>
+
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>Override CSS</th>
+            <th>SASS Variables</th>
+        </tr>
+
+        <tr>
+            <td>Chỉ sửa từng class riêng lẻ</td>
+            <td>Sửa toàn bộ hệ thống màu</td>
+        </tr>
+
+        <tr>
+            <td>Dễ lặp code</td>
+            <td>Quản lý tập trung</td>
+        </tr>
+
+        <tr>
+            <td>Khó bảo trì</td>
+            <td>Dễ bảo trì</td>
+        </tr>
+
+        <tr>
+            <td>Dễ xung đột CSS</td>
+            <td>Ít xung đột hơn</td>
+        </tr>
+
+        <tr>
+            <td>Không đồng bộ</td>
+            <td>Đồng bộ toàn bộ giao diện</td>
+        </tr>
+
+    </table>
+
+    <hr>
+
+    <h2>Kết luận</h2>
+
+    <p>
+        Để đổi màu chủ đạo của Bootstrap từ xanh sang <strong>#E63946</strong>,
+        nên sửa biến SASS:
+    </p>
+
+    <pre>
+$primary: #E63946;
+    </pre>
+
+    <p>
+        rồi biên dịch lại SCSS thành CSS. Đây là cách chuẩn, dễ bảo trì,
+        đồng bộ toàn bộ giao diện và được khuyến nghị trong các dự án Bootstrap thực tế.
+    </p>
+
+</body>
+</html>
