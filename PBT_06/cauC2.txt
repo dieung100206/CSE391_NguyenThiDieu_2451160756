@@ -1,0 +1,49 @@
+<li>Website quản trị (Admin Dashboard).</li>
+        <li>Dự án có thời gian ngắn.</li>
+        <li>Cần Responsive nhanh trên nhiều thiết bị.</li>
+    </ul>
+
+    <h3>Ví dụ:</h3>
+
+    <ul>
+        <li>Landing Page</li>
+        <li>Trang giới thiệu công ty</li>
+        <li>Hệ thống quản lý sinh viên</li>
+        <li>Website bán hàng đơn giản</li>
+    </ul>
+
+    <hr>
+
+    <h2>6. Khi nào KHÔNG NÊN dùng Bootstrap?</h2>
+
+    <ul>
+        <li>Website yêu cầu giao diện độc đáo.</li>
+        <li>Thiết kế UI/UX riêng biệt.</li>
+        <li>Dự án cần tối ưu hiệu năng cao.</li>
+        <li>Website có hệ thống design riêng.</li>
+        <li>Game Web hoặc ứng dụng đồ họa.</li>
+    </ul>
+
+    <h3>Ví dụ:</h3>
+
+    <ul>
+        <li>Facebook</li>
+        <li>Instagram</li>
+        <li>Figma</li>
+        <li>Canva</li>
+        <li>Ứng dụng SaaS lớn</li>
+    </ul>
+
+    <hr>
+
+    <h2>Kết luận</h2>
+
+    <p>
+        CSS thuần cho khả năng tùy biến cao nhất nhưng mất nhiều thời gian xây dựng.
+        Bootstrap giúp phát triển giao diện nhanh, responsive tốt và giảm đáng kể
+        lượng CSS phải viết. Bootstrap phù hợp cho các dự án cần tốc độ phát triển,
+        còn CSS thuần phù hợp khi cần thiết kế giao diện riêng và tối ưu sâu.
+    </p>
+
+</body>
+</html>
