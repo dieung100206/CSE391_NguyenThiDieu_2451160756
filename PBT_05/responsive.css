@@ -1,0 +1,155 @@
+/* =====================
+   MOBILE FIRST
+===================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, sans-serif;
+    font-size:14px;
+}
+
+img{
+    max-width:100%;
+    height:auto;
+    display:block;
+}
+
+header{
+    background:#333;
+    color:white;
+    padding:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:20px;
+    font-weight:bold;
+}
+
+.hamburger{
+    font-size:28px;
+    cursor:pointer;
+}
+
+nav{
+    display:none;
+}
+
+.layout{
+    padding:15px;
+}
+
+.sidebar{
+    display:none;
+}
+
+.ads{
+    display:none;
+}
+
+.products{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:15px;
+}
+
+.card{
+    border:1px solid #ddd;
+    padding:10px;
+    text-align:center;
+    border-radius:8px;
+}
+
+.card h3{
+    margin:10px 0;
+}
+
+footer{
+    background:#333;
+    color:white;
+    text-align:center;
+    padding:15px;
+    margin-top:20px;
+}
+
+/* =====================
+   TABLET >=768px
+===================== */
+
+@media (min-width:768px){
+
+    body{
+        font-size:16px;
+    }
+
+    .sidebar{
+        display:block;
+        margin-bottom:20px;
+        background:#f2f2f2;
+        padding:15px;
+        border-radius:8px;
+    }
+
+    .products{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+/* =====================
+   DESKTOP >=1024px
+===================== */
+
+@media (min-width:1024px){
+
+    body{
+        font-size:18px;
+    }
+
+    .hamburger{
+        display:none;
+    }
+
+    nav{
+        display:block;
+    }
+
+    nav ul{
+        display:flex;
+        gap:20px;
+        list-style:none;
+    }
+
+    nav a{
+        color:white;
+        text-decoration:none;
+    }
+
+    .layout{
+        display:grid;
+        grid-template-columns:220px 1fr 200px;
+        gap:20px;
+        align-items:start;
+    }
+
+    .sidebar{
+        margin-bottom:0;
+    }
+
+    .ads{
+        display:block;
+        background:#f2f2f2;
+        padding:15px;
+        border-radius:8px;
+    }
+
+    .products{
+        grid-template-columns:repeat(4,1fr);
+    }
+}
