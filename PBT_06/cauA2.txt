@@ -1,0 +1,54 @@
+<td>Chiều rộng cố định theo từng breakpoint, có khoảng trắng hai bên.</td>
+        </tr>
+
+        <tr>
+            <td>.container-fluid</td>
+            <td>Luôn rộng 100% màn hình ở mọi kích thước.</td>
+        </tr>
+
+        <tr>
+            <td>.container-md</td>
+            <td>100% chiều rộng dưới 768px, từ 768px trở lên sẽ có chiều rộng cố định như container.</td>
+        </tr>
+
+    </table>
+
+    <h3>Minh họa</h3>
+
+    <h4>.container</h4>
+
+    <pre>
+|    Nội dung    |
+(có khoảng trắng hai bên)
+    </pre>
+
+    <h4>.container-fluid</h4>
+
+    <pre>
+|Nội dung kéo dài toàn màn hình|
+    </pre>
+
+    <h4>.container-md</h4>
+
+    <pre>
+<768px:
+|Nội dung toàn màn hình|
+
+≥768px:
+|   Nội dung cố định   |
+    </pre>
+
+    <hr>
+
+    <h2>Kết luận</h2>
+
+    <ul>
+        <li><strong>d-none d-md-block</strong>: Ẩn dưới 768px, hiện từ 768px trở lên.</li>
+        <li>Spacing Utilities giúp điều chỉnh margin và padding nhanh chóng bằng class.</li>
+        <li><strong>.container</strong> có chiều rộng cố định theo breakpoint.</li>
+        <li><strong>.container-fluid</strong> luôn rộng 100%.</li>
+        <li><strong>.container-md</strong> full width ở mobile, cố định từ md trở lên.</li>
+    </ul>
+
+</body>
+</html>
