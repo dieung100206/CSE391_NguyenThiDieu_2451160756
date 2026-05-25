@@ -1,0 +1,220 @@
+/*
+===========================================
+BÀI TẬP: VAR - LET - CONST
+===========================================
+
+1. Dự đoán kết quả trước khi chạy
+2. Tạo file: var_let_const.js
+3. Chạy bằng trình duyệt hoặc NodeJS
+4. So sánh với dự đoán
+5. Giải thích các kết quả
+*/
+
+
+/* =========================================
+ĐOẠN 1
+========================================= */
+
+// console.log(x);
+// var x = 5;
+
+/*
+Dự đoán:
+
+undefined
+
+Giải thích:
+
+var được hoisting (đưa khai báo lên đầu phạm vi).
+
+JavaScript hiểu như:
+
+var x;
+console.log(x);
+x = 5;
+
+Nên x tồn tại nhưng chưa có giá trị => undefined
+*/
+
+
+/* =========================================
+ĐOẠN 2
+========================================= */
+
+// console.log(y);
+// let y = 10;
+
+/*
+Dự đoán:
+
+ReferenceError:
+Cannot access 'y' before initialization
+
+Giải thích:
+
+let cũng được hoisting nhưng không được khởi tạo ngay.
+
+Biến nằm trong
+Temporal Dead Zone (TDZ)
+
+Không thể truy cập trước dòng khai báo.
+*/
+
+
+/* =========================================
+ĐOẠN 3
+========================================= */
+
+// const z = 15;
+// z = 20;
+// console.log(z);
+
+/*
+Dự đoán:
+
+TypeError:
+Assignment to constant variable.
+
+Giải thích:
+
+const chỉ được gán giá trị một lần.
+
+Sau khi tạo:
+
+const z = 15;
+
+không thể gán lại:
+
+z = 20;
+*/
+
+
+/* =========================================
+ĐOẠN 4
+========================================= */
+
+// const arr = [1,2,3];
+// arr.push(4);
+// console.log(arr);
+
+/*
+Dự đoán:
+
+[1, 2, 3, 4]
+
+Giải thích:
+
+const không cho phép thay đổi
+tham chiếu (reference)
+
+Nhưng vẫn cho phép thay đổi
+nội dung bên trong object hoặc array.
+
+Array vẫn có thể:
+
+push()
+pop()
+shift()
+unshift()
+
+Miễn là không gán lại:
+
+arr = [5,6,7]; // lỗi
+*/
+
+
+/* =========================================
+ĐOẠN 5
+========================================= */
+
+// let a = 1;
+
+// {
+//     let a = 2;
+//     console.log("Trong block:", a);
+// }
+
+// console.log("Ngoài block:", a);
+
+/*
+Dự đoán:
+
+Trong block: 2
+Ngoài block: 1
+
+Giải thích:
+
+let có Block Scope.
+
+Biến a bên trong block:
+
+{
+    let a = 2;
+}
+
+là biến khác hoàn toàn với:
+
+let a = 1;
+
+ở bên ngoài.
+*/
+
+
+/* =========================================
+TỔNG KẾT
+=========================================
+
+1. var
+- Function Scope
+- Hoisting
+- Có thể truy cập trước khai báo
+- Giá trị ban đầu: undefined
+
+2. let
+- Block Scope
+- Hoisting nhưng nằm trong TDZ
+- Không truy cập trước khai báo
+
+3. const
+- Block Scope
+- Bắt buộc gán giá trị khi khai báo
+- Không được gán lại
+
+4. const với Array/Object
+- Không đổi được tham chiếu
+- Được phép thay đổi nội dung
+
+Ví dụ:
+
+const arr = [1,2];
+arr.push(3);     // đúng
+
+arr = [4,5];     // lỗi
+
+5. Block Scope
+
+let và const chỉ tồn tại
+trong cặp dấu {}
+var thì không có Block Scope.
+
+===========================================
+KẾT QUẢ DỰ KIẾN
+===========================================
+
+Đoạn 1:
+undefined
+
+Đoạn 2:
+ReferenceError
+
+Đoạn 3:
+TypeError
+
+Đoạn 4:
+[1, 2, 3, 4]
+
+Đoạn 5:
+Trong block: 2
+Ngoài block: 1
+===========================================
+*/
