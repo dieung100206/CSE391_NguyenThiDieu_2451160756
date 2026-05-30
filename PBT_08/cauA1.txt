@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function Declaration - Expression - Arrow Function</title>
+</head>
+<body>
+
+    <h1>So sánh Function Declaration, Function Expression và Arrow Function</h1>
+
+    <script>
+        /*
+        ============================================
+        1. FUNCTION DECLARATION
+        ============================================
+        */
+
+        function tinhThueBaoHiem1(luong) {
+            const thue = luong > 11000000 ? luong * 0.1 : 0;
+            const thuc_nhan = luong - thue;
+
+            return {
+                thue,
+                thuc_nhan
+            };
+        }
+        console.log("Function Declaration:");
+        console.log(tinhThueBaoHiem1(15000000));
+        /*
+        ============================================
+        2. FUNCTION EXPRESSION
+        ============================================
+        */
+
+        const tinhThueBaoHiem2 = function(luong) {
+            const thue = luong > 11000000 ? luong * 0.1 : 0;
+            const thuc_nhan = luong - thue;
+
+            return {
+                thue,
+                thuc_nhan
+            };
+        };
+
+        console.log("Function Expression:");
+        console.log(tinhThueBaoHiem2(15000000));
+        /*
+        ============================================
+        3. ARROW FUNCTION
+        ============================================
+        */
+
+        const tinhThueBaoHiem3 = (luong) => {
+            const thue = luong > 11000000 ? luong * 0.1 : 0;
+            const thuc_nhan = luong - thue;
+
+            return {
+                thue,
+                thuc_nhan
+            };
+        };
+
+        console.log("Arrow Function:");
+        console.log(tinhThueBaoHiem3(15000000));
+
+
+
+      
+       
+        SO SÁNH HOISTING
+  
+
+        1. Function Declaration được hoisting toàn bộ hàm.
+
+        Ví dụ:
+
+        console.log(tinhThueBaoHiem1(15000000));
+
+        function tinhThueBaoHiem1(luong) {
+            ...
+        }
+
+        => Chạy bình thường.
+
+        2. Function Expression KHÔNG được hoisting giá trị hàm.
+
+        Ví dụ:
+
+        console.log(tinhThueBaoHiem2(15000000));
+
+        const tinhThueBaoHiem2 = function(luong) {
+            ...
+        };
+
+        => Lỗi:
+        ReferenceError:
+        Cannot access 'tinhThueBaoHiem2' before initialization
+
+
+        3. Arrow Function cũng giống Function Expression.
+
+        Ví dụ:
+
+        console.log(tinhThueBaoHiem3(15000000));
+
+        const tinhThueBaoHiem3 = (luong) => {
+            ...
+        };
+
+        => Lỗi:
+        ReferenceError:
+        Cannot access 'tinhThueBaoHiem3' before initialization
+        KẾT LUẬN
+        - Function Declaration:
+          + Có hoisting.
+          + Gọi được trước khi khai báo.
+
+        - Function Expression:
+          + Không hoisting giá trị hàm.
+          + Không gọi được trước khi khai báo.
+
+        - Arrow Function:
+          + Không hoisting giá trị hàm.
+          + Không gọi được trước khi khai báo.
+        */
+    </script>
+</body>
+</html>
