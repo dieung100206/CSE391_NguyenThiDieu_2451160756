@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard APIs</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Dashboard Tổng Hợp API</h1>
+
+        <button id="refreshBtn">
+            Refresh All
+        </button>
+    </header>
+
+    <div class="status-bar">
+        <span id="globalStatus">
+            Ready
+        </span>
+
+        <span id="loadTime">
+            Data loaded in 0 ms
+        </span>
+    </div>
+
+    <section class="dashboard">
+
+        <div class="card">
+            <h2>👤 Random User</h2>
+            <div id="widget-user">
+                Loading...
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🌤 Weather</h2>
+            <div id="widget-weather">
+                Loading...
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🌍 Country</h2>
+            <div id="widget-country">
+                Loading...
+            </div>
+        </div>
+
+    </section>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
