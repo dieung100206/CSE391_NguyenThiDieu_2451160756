@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard Navigation App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Keyboard Navigation App</h1>
+
+        <button
+            id="openPaletteBtn"
+            aria-label="Mở Command Palette">
+            Ctrl + K
+        </button>
+    </header>
+
+    <!-- Gallery -->
+
+    <section class="gallery">
+
+        <button
+            id="prevBtn"
+            aria-label="Ảnh trước">
+            ◀
+        </button>
+
+        <img
+            id="galleryImage"
+            src="https://picsum.photos/id/1015/800/500"
+            alt="Gallery Image">
+
+        <button
+            id="nextBtn"
+            aria-label="Ảnh tiếp theo">
+            ▶
+        </button>
+
+    </section>
+
+    <div class="info">
+        <p>← → : Chuyển ảnh</p>
+        <p>1 - 9 : Chọn ảnh tương ứng</p>
+        <p>Space : Play/Pause slideshow</p>
+        <p>Ctrl + K : Mở Command Palette</p>
+        <p>Esc : Đóng modal</p>
+    </div>
+
+    <!-- Command Palette -->
+
+    <div
+        id="paletteOverlay"
+        class="overlay hidden"
+        aria-label="Command Palette">
+
+        <div class="palette">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Type a command..."
+                aria-label="Tìm command">
+
+            <ul id="commandList"></ul>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

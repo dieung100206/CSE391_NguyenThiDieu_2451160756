@@ -1,0 +1,102 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    padding: 30px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+h1 {
+    color: #333;
+}
+
+button {
+    cursor: pointer;
+}
+
+.gallery {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.gallery img {
+    width: 800px;
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.gallery button {
+    font-size: 30px;
+    padding: 10px 20px;
+}
+
+.info {
+    margin-top: 25px;
+    line-height: 1.8;
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.6);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 100px;
+}
+
+.hidden {
+    display: none;
+}
+
+.palette {
+    width: 600px;
+    max-width: 90%;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,.2);
+}
+
+.palette input {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 18px;
+    font-size: 18px;
+    border-bottom: 1px solid #ddd;
+}
+
+.palette ul {
+    list-style: none;
+}
+
+.palette li {
+    padding: 15px;
+    cursor: pointer;
+}
+
+.palette li:hover {
+    background: #f2f2f2;
+}
+
+.focus-ring:focus,
+button:focus,
+input:focus,
+li:focus {
+    outline: 3px solid #0d6efd;
+    outline-offset: 3px;
+}
