@@ -1,0 +1,53 @@
+# Bài tập Arrow Function với Array Methods
+
+```javascript
+const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+// 1. Lấy các số chẵn
+const soChan = nums.filter(n => n % 2 === 0);
+console.log(soChan);
+// [2, 4, 6, 8, 10]
+
+// 2. Nhân mỗi số với 3
+const nhanBa = nums.map(n => n * 3);
+console.log(nhanBa);
+// [3, 6, 9, 12, 15, 18, 21, 24, 27, 30]
+
+// 3. Tính tổng tất cả
+const tong = nums.reduce((sum, n) => sum + n, 0);
+console.log(tong);
+// 55
+
+// 4. Tìm số đầu tiên > 7
+const dauTienLonHon7 = nums.find(n => n > 7);
+console.log(dauTienLonHon7);
+// 8
+
+// 5. Kiểm tra có số > 10 không
+const coSoLonHon10 = nums.some(n => n > 10);
+console.log(coSoLonHon10);
+// false
+
+// 6. Kiểm tra tất cả đều > 0
+const tatCaLonHon0 = nums.every(n => n > 0);
+console.log(tatCaLonHon0);
+// true
+
+// 7. Tạo mảng "Số X là [chẵn/lẻ]"
+const moTaSo = nums.map(
+    n => `Số ${n} là ${n % 2 === 0 ? "chẵn" : "lẻ"}`
+);
+console.log(moTaSo);
+/*
+[
+  "Số 1 là lẻ",
+  "Số 2 là chẵn",
+  ...
+  "Số 10 là chẵn"
+]
+*/
+// 8. Đảo ngược mảng (không mutate mảng gốc)
+const daoNguoc = [...nums].reverse();
+console.log(daoNguoc);
+// [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+```

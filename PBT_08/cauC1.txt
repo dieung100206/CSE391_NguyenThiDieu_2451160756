@@ -1,0 +1,27 @@
+// Refactor sử dụng filter, map, sort, destructuring, arrow functions
+
+const processOrders = orders =>
+    orders
+        .filter(({ status, total }) => status === "completed" && total > 100000)
+        .map(({ id, customer, total }) => ({
+            id,
+            customer,
+            total,
+            discount: total * 0.1,
+            finalTotal: total * 0.9
+        }))
+        .sort((a, b) => b.finalTotal - a.finalTotal);
+
+// Dữ liệu mẫu
+const orders = [
+    { id: 1, customer: "Nguyen Van A", total: 150000, status: "completed" },
+    { id: 2, customer: "Tran Thi B", total: 80000, status: "completed" },
+    { id: 3, customer: "Le Van C", total: 250000, status: "pending" },
+    { id: 4, customer: "Pham Thi D", total: 300000, status: "completed" }
+];
+
+// Gọi hàm và hiển thị kết quả
+const result = processOrders(orders);
+
+console.log("Danh sách đơn hàng sau khi xử lý:");
+console.table(result);

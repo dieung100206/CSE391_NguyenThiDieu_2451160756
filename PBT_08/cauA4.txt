@@ -1,0 +1,264 @@
+# Dự đoán Output và Giải thích
+
+## Đề bài
+
+```javascript
+const product = {
+    name: "iPhone 16",
+    price: 25990000,
+    specs: { ram: 8, storage: 256, color: "Titan" }
+};
+
+// Destructuring
+const { name, price, specs: { ram, color } } = product;
+console.log(name, price, ram, color);
+console.log(specs);
+
+// Spread
+const updated = { ...product, price: 23990000, sale: true };
+console.log(updated.price);
+console.log(updated.sale);
+console.log(product.price);
+
+// Spread gotcha
+const copy = { ...product };
+copy.specs.ram = 16;
+console.log(product.specs.ram);
+```
+
+---
+
+## 1. Destructuring
+
+### Câu lệnh
+
+```javascript
+const { name, price, specs: { ram, color } } = product;
+```
+
+Tách dữ liệu từ object:
+
+```javascript
+name = "iPhone 16"
+price = 25990000
+ram = 8
+color = "Titan"
+```
+
+### Output
+
+```javascript
+console.log(name, price, ram, color);
+```
+
+Kết quả:
+
+```javascript
+iPhone 16 25990000 8 Titan
+```
+
+---
+
+### Dòng tiếp theo
+
+```javascript
+console.log(specs);
+```
+
+Kết quả:
+
+```javascript
+ReferenceError: specs is not defined
+```
+
+### Giải thích
+
+Trong câu lệnh destructuring:
+
+```javascript
+const { name, price, specs: { ram, color } } = product;
+```
+
+Chỉ tạo ra các biến:
+
+```javascript
+name
+price
+ram
+color
+```
+
+Không tạo biến tên `specs`.
+
+Vì vậy:
+
+```javascript
+console.log(specs);
+```
+
+sẽ báo lỗi.
+
+---
+
+## 2. Spread Operator
+
+### Câu lệnh
+
+```javascript
+const updated = {
+    ...product,
+    price: 23990000,
+    sale: true
+};
+```
+
+Object mới được tạo:
+
+```javascript
+{
+    name: "iPhone 16",
+    price: 23990000,
+    specs: { ram: 8, storage: 256, color: "Titan" },
+    sale: true
+}
+```
+
+### Output
+
+```javascript
+console.log(updated.price);
+```
+
+Kết quả:
+
+```javascript
+23990000
+```
+
+---
+
+```javascript
+console.log(updated.sale);
+```
+
+Kết quả:
+
+```javascript
+true
+```
+
+---
+
+```javascript
+console.log(product.price);
+```
+
+Kết quả:
+
+```javascript
+25990000
+```
+
+### Giải thích
+
+Spread tạo object mới nên việc thay đổi:
+
+```javascript
+price: 23990000
+```
+
+chỉ ảnh hưởng đến `updated`, không làm thay đổi `product`.
+
+---
+
+## 3. Spread Gotcha (Bẫy thường gặp)
+
+### Câu lệnh
+
+```javascript
+const copy = { ...product };
+```
+
+Đây là **shallow copy** (sao chép nông).
+
+Object ngoài được sao chép nhưng object lồng bên trong vẫn dùng chung tham chiếu.
+
+Sau đó:
+
+```javascript
+copy.specs.ram = 16;
+```
+
+Thực chất:
+
+```javascript
+copy.specs === product.specs
+```
+
+nên cả hai cùng trỏ tới một object `specs`.
+
+Vì vậy:
+
+```javascript
+console.log(product.specs.ram);
+```
+
+Kết quả:
+
+```javascript
+16
+```
+
+---
+
+## Kết luận
+
+### Output thực tế
+
+```javascript
+iPhone 16 25990000 8 Titan
+ReferenceError: specs is not defined
+```
+
+Chương trình dừng tại đây nên các dòng phía dưới sẽ không chạy.
+
+---
+
+### Nếu bỏ dòng
+
+```javascript
+console.log(specs);
+```
+
+thì các kết quả tiếp theo là:
+```javascript
+23990000
+true
+25990000
+16
+```
+
+---
+
+## Giải thích ngắn gọn
+
+* Destructuring lồng object chỉ tạo biến `ram` và `color`, không tạo biến `specs`.
+* Spread (`...`) tạo object mới nhưng chỉ sao chép nông (shallow copy).
+* Thuộc tính lồng object vẫn dùng chung tham chiếu.
+* Vì vậy khi sửa:
+
+```javascript
+copy.specs.ram = 16;
+```
+
+thì:
+
+```javascript
+product.specs.ram
+```
+
+cũng trở thành:
+
+```javascript
+16
+```

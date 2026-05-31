@@ -1,0 +1,71 @@
+// Thư viện miniArray tự cài đặt map, filter, reduce
+// Không sử dụng Array.prototype.map/filter/reduce
+
+const miniArray = {
+    map(arr, fn) {
+        const result = [];
+
+        for (let i = 0; i < arr.length; i++) {
+            result.push(fn(arr[i], i, arr));
+        }
+
+        return result;
+    },
+
+    filter(arr, fn) {
+        const result = [];
+
+        for (let i = 0; i < arr.length; i++) {
+            if (fn(arr[i], i, arr)) {
+                result.push(arr[i]);
+            }
+        }
+
+        return result;
+    },
+
+    reduce(arr, fn, initialValue) {
+        let accumulator = initialValue;
+        let startIndex = 0;
+
+        if (initialValue === undefined) {
+            accumulator = arr[0];
+            startIndex = 1;
+        }
+
+        for (let i = startIndex; i < arr.length; i++) {
+            accumulator = fn(accumulator, arr[i], i, arr);
+        }
+
+        return accumulator;
+    }
+};
+
+// ======================
+// TEST
+// ======================
+
+console.log("MAP:");
+console.log(miniArray.map([1, 2, 3], x => x * 2));
+// [2, 4, 6]
+
+console.log("FILTER:");
+console.log(miniArray.filter([1, 2, 3, 4], x => x > 2));
+// [3, 4]
+
+console.log("REDUCE:");
+console.log(miniArray.reduce([1, 2, 3, 4], (a, b) => a + b, 0));
+// 10
+
+// Test thêm
+console.log("Tổng:");
+console.log(miniArray.reduce([10, 20, 30], (a, b) => a + b, 0));
+// 60
+
+console.log("Bình phương:");
+console.log(miniArray.map([1, 2, 3, 4], x => x * x));
+// [1, 4, 9, 16]
+
+console.log("Số chẵn:");
+console.log(miniArray.filter([1, 2, 3, 4, 5, 6], x => x % 2 === 0));
+// [2, 4, 6]

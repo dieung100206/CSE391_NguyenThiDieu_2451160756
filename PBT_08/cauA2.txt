@@ -1,0 +1,199 @@
+# BÀI LÀM: DỰ ĐOÁN OUTPUT VÀ GIẢI THÍCH
+
+## Đoạn 1
+
+```javascript
+function counter() {
+    let count = 0;
+    return {
+        increment: () => ++count,
+        decrement: () => --count,
+        getCount: () => count
+    };
+}
+
+const c = counter();
+
+console.log(c.increment());
+console.log(c.increment());
+console.log(c.increment());
+console.log(c.decrement());
+console.log(c.getCount());
+```
+
+### Dự đoán Output
+
+```javascript
+1
+2
+3
+2
+2
+```
+
+### Giải thích
+
+Khi gọi:
+
+```javascript
+const c = counter();
+```
+
+Biến `count` được khởi tạo bằng 0 và được các hàm bên trong ghi nhớ thông qua Closure.
+
+* Lần 1: `increment()` → count từ 0 lên 1 → in ra 1
+* Lần 2: `increment()` → count từ 1 lên 2 → in ra 2
+* Lần 3: `increment()` → count từ 2 lên 3 → in ra 3
+* `decrement()` → count từ 3 xuống 2 → in ra 2
+* `getCount()` → trả về giá trị hiện tại của count là 2
+
+Do Closure lưu lại biến `count` nên các lần gọi hàm đều truy cập cùng một biến.
+
+---
+
+## Đoạn 2
+
+```javascript
+for (var i = 0; i < 3; i++) {
+    setTimeout(() => console.log("var:", i), 100);
+}
+
+for (let j = 0; j < 3; j++) {
+    setTimeout(() => console.log("let:", j), 200);
+}
+```
+
+### Dự đoán Output
+
+Sau khoảng 100ms:
+
+```javascript
+var: 3
+var: 3
+var: 3
+```
+
+Sau khoảng 200ms:
+
+```javascript
+let: 0
+let: 1
+let: 2
+```
+
+### Output đầy đủ
+
+```javascript
+var: 3
+var: 3
+var: 3
+let: 0
+let: 1
+let: 2
+```
+
+---
+
+## Giải thích sự khác nhau giữa var và let
+
+### 1. Trường hợp var
+
+```javascript
+for (var i = 0; i < 3; i++) {
+    setTimeout(() => console.log("var:", i), 100);
+}
+```
+
+Biến `i` được khai báo bằng `var` nên có phạm vi Function Scope.
+
+Toàn bộ vòng lặp chỉ sử dụng một biến `i`.
+
+Vòng lặp chạy xong:
+
+```javascript
+i = 3
+```
+
+Các callback của `setTimeout` chỉ được thực hiện sau 100ms.
+
+Khi callback chạy thì giá trị hiện tại của `i` đã là 3.
+
+Do đó cả 3 callback đều in:
+
+```javascript
+var: 3
+var: 3
+var: 3
+```
+
+---
+
+### 2. Trường hợp let
+
+```javascript
+for (let j = 0; j < 3; j++) {
+    setTimeout(() => console.log("let:", j), 200);
+}
+```
+
+Biến `j` được khai báo bằng `let` nên có Block Scope.
+
+JavaScript tạo ra một biến `j` mới cho mỗi lần lặp.
+
+Lần lặp thứ nhất:
+
+```javascript
+j = 0
+```
+
+Lần lặp thứ hai:
+
+```javascript
+j = 1
+```
+
+Lần lặp thứ ba:
+
+```javascript
+j = 2
+```
+
+Mỗi callback ghi nhớ giá trị riêng của biến `j`.
+
+Sau 200ms sẽ in:
+
+```javascript
+let: 0
+let: 1
+let: 2
+```
+
+---
+
+## Kết luận
+
+| Đặc điểm            | var                      | let                        |
+| ------------------- | ------------------------ | -------------------------- |
+| Scope               | Function Scope           | Block Scope                |
+| Biến trong vòng lặp | Dùng chung một biến      | Tạo biến mới mỗi lần lặp   |
+| Kết quả setTimeout  | 3, 3, 3                  | 0, 1, 2                    |
+| Closure             | Cùng tham chiếu một biến | Mỗi callback có biến riêng |
+
+### Kết quả cuối cùng
+
+```javascript
+Đoạn 1:
+1
+2
+3
+2
+2
+
+Đoạn 2:
+var: 3
+var: 3
+var: 3
+let: 0
+let: 1
+let: 2
+```
