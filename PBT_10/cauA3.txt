@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Promise & Callback Hell</title>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+    }
+
+    body{
+        font-family:Arial, sans-serif;
+        background:#f5f5f5;
+        max-width:1200px;
+        margin:auto;
+        padding:30px;
+        line-height:1.8;
+    }
+
+    h1{
+        text-align:center;
+        margin-bottom:30px;
+        color:#333;
+    }
+
+    h2{
+        color:#0d6efd;
+        margin-bottom:15px;
+    }
+
+    h3{
+        margin:15px 0;
+        color:#444;
+    }
+
+    .section{
+        background:white;
+        padding:25px;
+        margin-bottom:20px;
+        border-radius:10px;
+        box-shadow:0 2px 8px rgba(0,0,0,.1);
+    }
+
+    pre{
+        background:#1e1e1e;
+        color:white;
+        padding:15px;
+        border-radius:8px;
+        overflow:auto;
+        margin-top:10px;
+    }
+
+    .diagram{
+        background:#eef5ff;
+        padding:20px;
+        border-radius:10px;
+        font-family:monospace;
+        white-space:pre;
+    }
+
+    table{
+        width:100%;
+        border-collapse:collapse;
+        margin-top:15px;
+    }
+
+    table,th,td{
+        border:1px solid #ccc;
+    }
+
+    th{
+        background:#0d6efd;
+        color:white;
+        padding:10px;
+    }
+
+    td{
+        padding:10px;
+    }
+</style>
+</head>
+<body>
+
+<h1>Promise và Callback Hell trong JavaScript</h1>
+
+<div class="section">
+
+<h2>1. Promise là gì?</h2>
+
+<p>
+Promise là một đối tượng đại diện cho kết quả của một tác vụ bất đồng bộ
+(Asynchronous Operation).
+</p>
+
+<p>
+Ví dụ:
+</p>
+
+<ul>
+<li>Gọi API</li>
+<li>Đọc file</li>
+<li>Truy vấn Database</li>
+<li>Upload ảnh</li>
+</ul>
+
+</div>
+
+<div class="section">
+
+<h2>2. Ba trạng thái của Promise</h2>
+
+<div class="diagram">
+                Promise
+                   |
+                   ▼
+             [ Pending ]
+                   |
+          ┌────────┴────────┐
+          ▼                 ▼
+   [ Fulfilled ]      [ Rejected ]
+      Thành công          Thất bại
+</div>
+
+<h3>Pending</h3>
+
+<p>
+Trạng thái ban đầu khi Promise đang thực thi.
+</p>
+
+<pre>
+const promise = fetch(url);
+</pre>
+
+<p>
+Lúc này Promise chưa hoàn thành.
+</p>
+
+<hr>
+
+<h3>Fulfilled</h3>
+
+<p>
+Tác vụ hoàn thành thành công.
+</p>
+
+<pre>
+resolve(data);
+</pre>
+
+Ví dụ:
+
+<pre>
+Promise.resolve("Success");
+</pre>
+
+<hr>
+
+<h3>Rejected</h3>
+
+<p>
+Tác vụ thất bại.
+</p>
+
+<pre>
+reject(error);
+</pre>
+
+Ví dụ:
+
+<pre>
+Promise.reject("Network Error");
+</pre>
+
+</div>
+
+<div class="section">
+
+<h2>3. Ví dụ Promise</h2>
+
+<pre>
+const promise = new Promise((resolve, reject) => {
+
+    let success = true;
+
+    if(success){
+        resolve("Lấy dữ liệu thành công");
+    }else{
+        reject("Lỗi kết nối");
+    }
+
+});
+
+promise
+.then(result => console.log(result))
+.catch(error => console.log(error));
+</pre>
+
+</div>
+
+<div class="section">
+
+<h2>4. Callback Hell là gì?</h2>
+
+<p>
+Callback Hell là hiện tượng các callback lồng nhau quá nhiều cấp.
+</p>
+
+<p>
+Code sẽ bị:
+</p>
+
+<ul>
+<li>Khó đọc</li>
+<li>Khó bảo trì</li>
+<li>Khó debug</li>
+<li>Khó xử lý lỗi</li>
+</ul>
+
+<p>
+Hình dạng thường giống "Kim tự tháp chết chóc" (Pyramid of Doom).
+</p>
+
+</div>
+
+<div class="section">
+
+<h2>5. Ví dụ Callback Hell (4 cấp)</h2>
+
+<pre>
+loginUser(function(user){
+
+    getProfile(user.id, function(profile){
+
+        getPosts(profile.id, function(posts){
+
+            getComments(posts[0].id, function(comments){
+
+                console.log(comments);
+
+            });
+
+        });
+
+    });
+
+});
+</pre>
+
+<h3>Dạng cây lồng nhau</h3>
+
+<div class="diagram">
+loginUser()
+    |
+    └── getProfile()
+            |
+            └── getPosts()
+                    |
+                    └── getComments()
+</div>
+
+<p>
+Mỗi thao tác phải chờ thao tác trước hoàn thành.
+</p>
+
+</div>
+
+<div class="section">
+
+<h2>6. Refactor bằng Promise</h2>
+
+<pre>
+loginUser()
+.then(user => getProfile(user.id))
+.then(profile => getPosts(profile.id))
+.then(posts => getComments(posts[0].id))
+.then(comments => {
+
+    console.log(comments);
+
+})
+.catch(error => {
+
+    console.log(error);
+
+});
+</pre>
+
+<p>
+Ưu điểm:
+</p>
+
+<ul>
+<li>Không bị lồng callback.</li>
+<li>Dễ đọc hơn.</li>
+<li>Có thể dùng một catch chung.</li>
+</ul>
+
+</div>
+
+<div class="section">
+
+<h2>7. Refactor bằng Async/Await</h2>
+
+<pre>
+async function loadData(){
+
+    try{
+
+        const user =
+            await loginUser();
+
+        const profile =
+            await getProfile(user.id);
+
+        const posts =
+            await getPosts(profile.id);
+
+        const comments =
+            await getComments(posts[0].id);
+
+        console.log(comments);
+
+    }
+    catch(error){
+
+        console.log(error);
+
+    }
+
+}
+</pre>
+
+<p>
+Đây là cách viết hiện đại nhất hiện nay.
+</p>
+
+</div>
+
+<div class="section">
+
+<h2>8. So sánh 3 cách viết</h2>
+
+<table>
+
+<tr>
+<th>Cách viết</th>
+<th>Ưu điểm</th>
+<th>Nhược điểm</th>
+</tr>
+
+<tr>
+<td>Callback</td>
+<td>Đơn giản</td>
+<td>Dễ bị Callback Hell</td>
+</tr>
+
+<tr>
+<td>Promise</td>
+<td>Dễ quản lý hơn Callback</td>
+<td>Nhiều .then()</td>
+</tr>
+
+<tr>
+<td>Async/Await</td>
+<td>Dễ đọc nhất</td>
+<td>Phải dùng trong async function</td>
+</tr>
+
+</table>
+
+</div>
+
+<div class="section">
+
+<h2>9. Kết luận</h2>
+
+<div class="diagram">
+Callback
+    ↓
+
+Callback Hell
+    ↓
+
+Promise
+    ↓
+
+Async / Await
+</div>
+
+<p>
+Trong JavaScript hiện đại:
+</p>
+
+<ul>
+<li>Callback chỉ dùng cho các trường hợp đơn giản.</li>
+<li>Promise giúp xử lý bất đồng bộ tốt hơn.</li>
+<li>Async/Await là cách được khuyến khích sử dụng nhất.</li>
+</ul>
+
+</div>
+
+</body>
+</html>

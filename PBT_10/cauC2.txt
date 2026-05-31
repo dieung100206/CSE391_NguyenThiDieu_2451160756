@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Promise.all vs allSettled vs race vs any</title>
+
+<style>
+body{
+    font-family:Arial,sans-serif;
+    max-width:1200px;
+    margin:auto;
+    padding:30px;
+    background:#f5f5f5;
+    line-height:1.8;
+}
+
+h1{
+    text-align:center;
+}
+
+.section{
+    background:white;
+    padding:20px;
+    margin-bottom:20px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+table,th,td{
+    border:1px solid #ccc;
+}
+
+th{
+    background:#0d6efd;
+    color:white;
+    padding:10px;
+}
+
+td{
+    padding:10px;
+}
+
+pre{
+    background:#1e1e1e;
+    color:white;
+    padding:15px;
+    border-radius:8px;
+    overflow:auto;
+}
+</style>
+</head>
+<body>
+
+<h1>Promise.all(), allSettled(), race(), any()</h1>
+
+<div class="section">
+
+<h2>Bảng so sánh tổng quát</h2>
+
+<table>
+<tr>
+<th>Method</th>
+<th>Khi nào Resolve?</th>
+<th>Khi nào Reject?</th>
+<th>Use Case</th>
+</tr>
+
+<tr>
+<td>Promise.all()</td>
+<td>Tất cả Promise thành công</td>
+<td>Chỉ cần 1 Promise lỗi</td>
+<td>Tải dữ liệu bắt buộc phải có đủ</td>
+</tr>
+
+<tr>
+<td>Promise.allSettled()</td>
+<td>Tất cả Promise hoàn thành (thành công hoặc thất bại)</td>
+<td>Không reject</td>
+<td>Thu thập kết quả nhiều API</td>
+</tr>
+
+<tr>
+<td>Promise.race()</td>
+<td>Promise đầu tiên resolve</td>
+<td>Promise đầu tiên reject</td>
+<td>Timeout, chọn kết quả nhanh nhất</td>
+</tr>
+
+<tr>
+<td>Promise.any()</td>
+<td>Promise đầu tiên thành công</td>
+<td>Tất cả Promise đều thất bại</td>
+<td>Fallback server, CDN</td>
+</tr>
+
+</table>
+
+</div>
+
+<div class="section">
+
+<h2>1. Promise.all()</h2>
+
+<p>
+Resolve khi tất cả Promise thành công.
+</p>
+
+<p>
+Reject ngay khi có một Promise thất bại.
+</p>
+
+<h3>Thực tế E-Commerce</h3>
+
+<p>
+Trang chi tiết sản phẩm cần:
+</p>
+
+<ul>
+<li>Thông tin sản phẩm</li>
+<li>Đánh giá</li>
+<li>Tồn kho</li>
+</ul>
+
+<p>
+Thiếu một dữ liệu thì trang không thể hiển thị đầy đủ.
+</p>
+
+<pre>
+async function loadProductPage(id){
+
+    const [
+        product,
+        reviews,
+        stock
+    ] = await Promise.all([
+
+        fetch(`/api/products/${id}`)
+            .then(r => r.json()),
+
+        fetch(`/api/reviews/${id}`)
+            .then(r => r.json()),
+
+        fetch(`/api/stock/${id}`)
+            .then(r => r.json())
+
+    ]);
+
+    return {
+        product,
+        reviews,
+        stock
+    };
+
+}
+</pre>
+
+<h3>Kết quả</h3>
+
+<pre>
+Product OK
+Reviews OK
+Stock FAIL
+
+=> Promise.all() reject ngay
+</pre>
+
+</div>
+
+<div class="section">
+
+<h2>2. Promise.allSettled()</h2>
+
+<p>
+Chờ tất cả Promise hoàn thành.
+</p>
+
+<p>
+Không quan tâm thành công hay thất bại.
+</p>
+
+<p>
+Luôn resolve.
+</p>
+
+<h3>Thực tế Dashboard Admin</h3>
+
+<p>
+Dashboard gọi nhiều API:
+</p>
+
+<ul>
+<li>Doanh thu</li>
+<li>Đơn hàng</li>
+<li>Khách hàng</li>
+<li>Sản phẩm bán chạy</li>
+</ul>
+
+<p>
+Một API lỗi không nên làm hỏng cả dashboard.
+</p>
+
+<pre>
+const results =
+    await Promise.allSettled([
+
+        fetch("/api/revenue")
+            .then(r => r.json()),
+
+        fetch("/api/orders")
+            .then(r => r.json()),
+
+        fetch("/api/customers")
+            .then(r => r.json()),
+
+        fetch("/api/top-products")
+            .then(r => r.json())
+
+    ]);
+
+console.log(results);
+</pre>
+
+<h3>Kết quả</h3>
+
+<pre>
+[
+ { status:"fulfilled", value:{...} },
+
+ { status:"fulfilled", value:{...} },
+
+ { status:"rejected", reason:Error },
+
+ { status:"fulfilled", value:{...} }
+]
+</pre>
+
+<p>
+Dashboard vẫn hiển thị được phần dữ liệu còn lại.
+</p>
+
+</div>
+
+<div class="section">
+
+<h2>3. Promise.race()</h2>
+
+<p>
+Promise nào hoàn thành đầu tiên sẽ quyết định kết quả.
+</p>
+
+<h3>Thực tế: Timeout API</h3>
+
+<p>
+Nếu API quá chậm (>10 giây) thì huỷ request.
+</p>
+
+<pre>
+function timeout(ms){
+
+    return new Promise((_, reject)=>{
+
+        setTimeout(()=>{
+
+            reject(
+                new Error("Timeout")
+            );
+
+        }, ms);
+
+    });
+
+}
+
+const response =
+    await Promise.race([
+
+        fetch("/api/products"),
+
+        timeout(10000)
+
+    ]);
+</pre>
+
+<h3>Kết quả</h3>
+
+<pre>
+API trả trước 10 giây
+=> Resolve
+
+Timeout xảy ra trước
+=> Reject
+</pre>
+
+<p>
+Đây là use case phổ biến nhất của Promise.race().
+</p>
+
+</div>
+
+<div class="section">
+
+<h2>4. Promise.any()</h2>
+
+<p>
+Chỉ cần một Promise thành công.
+</p>
+
+<p>
+Các Promise lỗi được bỏ qua.
+</p>
+
+<p>
+Chỉ reject khi tất cả cùng thất bại.
+</p>
+
+<h3>Thực tế: CDN Fallback</h3>
+
+<p>
+Ảnh sản phẩm được lưu trên nhiều CDN.
+</p>
+
+<p>
+Lấy ảnh từ server nào phản hồi thành công trước.
+</p>
+
+<pre>
+const image =
+    await Promise.any([
+
+        fetch(
+            "https://cdn1.shop.com/image.jpg"
+        ),
+
+        fetch(
+            "https://cdn2.shop.com/image.jpg"
+        ),
+
+        fetch(
+            "https://cdn3.shop.com/image.jpg"
+        )
+
+    ]);
+
+console.log(image);
+</pre>
+
+<h3>Kết quả</h3>
+
+<pre>
+CDN1 FAIL
+CDN2 FAIL
+CDN3 SUCCESS
+
+=> Promise.any() resolve
+</pre>
+
+<p>
+Chỉ cần một CDN hoạt động là đủ.
+</p>
+
+</div>
+
+<div class="section">
+
+<h2>So sánh trực quan</h2>
+
+<h3>Promise.all()</h3>
+
+<pre>
+A ✓
+B ✓
+C ✗
+
+=> Reject
+</pre>
+
+<h3>Promise.allSettled()</h3>
+
+<pre>
+A ✓
+B ✓
+C ✗
+
+=> Resolve
+=> Trả kết quả của cả 3
+</pre>
+
+<h3>Promise.race()</h3>
+
+<pre>
+A (3s)
+B (1s)
+C (5s)
+
+=> B thắng
+</pre>
+
+<h3>Promise.any()</h3>
+
+<pre>
+A ✗
+B ✗
+C ✓
+
+=> Resolve bằng C
+</pre>
+
+</div>
+
+<div class="section">
+
+<h2>Mẹo nhớ nhanh</h2>
+
+<table>
+<tr>
+<th>Method</th>
+<th>Cách nhớ</th>
+</tr>
+
+<tr>
+<td>all()</td>
+<td>Tất cả phải thành công</td>
+</tr>
+
+<tr>
+<td>allSettled()</td>
+<td>Tôi muốn biết kết quả của tất cả</td>
+</tr>
+
+<tr>
+<td>race()</td>
+<td>Ai về đích trước thì thắng</td>
+</tr>
+
+<tr>
+<td>any()</td>
+<td>Chỉ cần một người thành công</td>
+</tr>
+
+</table>
+
+</div>
+
+</body>
+</html>

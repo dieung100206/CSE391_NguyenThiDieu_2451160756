@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giải thích Async/Await, Fetch và Try Catch</title>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+    }
+
+    body{
+        font-family:Arial, sans-serif;
+        max-width:1200px;
+        margin:auto;
+        padding:30px;
+        background:#f5f5f5;
+        line-height:1.8;
+    }
+
+    h1{
+        text-align:center;
+        margin-bottom:30px;
+        color:#333;
+    }
+
+    h2{
+        margin-bottom:15px;
+        color:#0d6efd;
+    }
+
+    h3{
+        margin:15px 0;
+        color:#444;
+    }
+
+    .section{
+        background:white;
+        padding:25px;
+        margin-bottom:20px;
+        border-radius:10px;
+        box-shadow:0 2px 8px rgba(0,0,0,.1);
+    }
+
+    pre{
+        background:#1e1e1e;
+        color:#fff;
+        padding:15px;
+        border-radius:8px;
+        overflow:auto;
+        margin:10px 0;
+    }
+
+    table{
+        width:100%;
+        border-collapse:collapse;
+        margin-top:10px;
+    }
+
+    table,th,td{
+        border:1px solid #ccc;
+    }
+
+    th{
+        background:#0d6efd;
+        color:white;
+        padding:10px;
+    }
+
+    td{
+        padding:10px;
+    }
+
+    .success{
+        color:green;
+        font-weight:bold;
+    }
+
+    .error{
+        color:red;
+        font-weight:bold;
+    }
+</style>
+</head>
+<body>
+
+<h1>Phân tích Async/Await, Fetch API và Try...Catch</h1>
+
+<div class="section">
+
+<h2>Đoạn Code</h2>
+
+<pre>
+async function getData() {
+    try {
+        const response = await fetch("https://api.example.com/data");
+
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data;
+
+    } catch (error) {
+        console.error("Failed:", error.message);
+        return null;
+    }
+}
+</pre>
+
+</div>
+
+<div class="section">
+
+<h2>1. async function getData()</h2>
+
+<pre>
+async function getData()
+</pre>
+
+<p>
+Từ khóa <b>async</b> dùng để khai báo hàm bất đồng bộ
+(Asynchronous Function).
+</p>
+
+<p>Đặc điểm:</p>
+
+<ul>
+<li>Luôn trả về Promise.</li>
+<li>Cho phép sử dụng await bên trong hàm.</li>
+<li>Giúp code bất đồng bộ dễ đọc hơn Promise chaining.</li>
+</ul>
+
+<h3>Ví dụ</h3>
+
+<pre>
+async function test() {
+    return 100;
+}
+</pre>
+
+<p>Tương đương:</p>
+
+<pre>
+function test() {
+    return Promise.resolve(100);
+}
+</pre>
+
+</div>
+
+<div class="section">
+
+<h2>2. await fetch(...) - Fetch trả về gì?</h2>
+
+<pre>
+const response = await fetch(
+    "https://api.example.com/data"
+);
+</pre>
+
+<p>
+fetch() dùng để gửi HTTP Request đến server.
+</p>
+
+<p>
+Nó KHÔNG trả dữ liệu ngay lập tức.
+</p>
+
+<p>
+fetch() trả về:
+</p>
+
+<pre>
+Promise&lt;Response&gt;
+</pre>
+
+<h3>Nếu không dùng await</h3>
+
+<pre>
+const response = fetch(url);
+
+console.log(response);
+</pre>
+
+<p>Kết quả:</p>
+
+<pre>
+Promise { &lt;pending&gt; }
+</pre>
+
+<h3>Nếu dùng await</h3>
+
+<pre>
+const response = await fetch(url);
+</pre>
+
+<p>
+JavaScript sẽ chờ Promise hoàn thành rồi mới tiếp tục.
+</p>
+
+<p>Khi đó response là:</p>
+
+<pre>
+Response {
+    status: 200,
+    ok: true,
+    ...
+}
+</pre>
+
+</div>
+
+<div class="section">
+
+<h2>3. response.ok là gì?</h2>
+
+<pre>
+if (!response.ok)
+</pre>
+
+<p>
+response.ok là thuộc tính của đối tượng Response.
+</p>
+
+<p>Tương đương:</p>
+
+<pre>
+response.status >= 200 &&
+response.status < 300
+</pre>
+
+<h3>response.ok = true</h3>
+
+<table>
+<tr>
+<th>Status</th>
+<th>Ý nghĩa</th>
+</tr>
+
+<tr>
+<td>200</td>
+<td>OK</td>
+</tr>
+
+<tr>
+<td>201</td>
+<td>Created</td>
+</tr>
+
+<tr>
+<td>204</td>
+<td>No Content</td>
+</tr>
+</table>
+
+<h3>response.ok = false</h3>
+
+<table>
+<tr>
+<th>Status</th>
+<th>Ý nghĩa</th>
+</tr>
+
+<tr>
+<td>401</td>
+<td>Unauthorized</td>
+</tr>
+
+<tr>
+<td>404</td>
+<td>Not Found</td>
+</tr>
+
+<tr>
+<td>500</td>
+<td>Internal Server Error</td>
+</tr>
+</table>
+
+</div>
+
+<div class="section">
+
+<h2>4. throw new Error()</h2>
+
+<pre>
+throw new Error(`HTTP ${response.status}`);
+</pre>
+
+<p>
+Nếu API trả về:
+</p>
+
+<pre>
+404 Not Found
+</pre>
+
+<p>
+response.ok sẽ bằng false.
+</p>
+
+<p>
+Lúc đó chương trình tự tạo Exception:
+</p>
+
+<pre>
+Error: HTTP 404
+</pre>
+
+<p>
+Sau đó luồng chương trình nhảy thẳng xuống catch().
+</p>
+
+</div>
+
+<div class="section">
+
+<h2>5. response.json() là gì?</h2>
+
+<pre>
+const data = await response.json();
+</pre>
+
+<p>
+Nhiều người nghĩ dữ liệu đã có ngay sau fetch().
+</p>
+
+<p>
+Thực tế chưa.
+</p>
+
+<h3>Bước 1</h3>
+
+<pre>
+await fetch(...)
+</pre>
+
+<p>
+Chỉ nhận được đối tượng Response.
+</p>
+
+<p>
+Body vẫn chưa được đọc và chuyển đổi.
+</p>
+
+<h3>Bước 2</h3>
+
+<pre>
+await response.json()
+</pre>
+
+<p>
+Đọc phần body và parse JSON thành Object JavaScript.
+</p>
+
+<p>Ví dụ server trả:</p>
+
+<pre>
+{
+    "name":"Diệu",
+    "age":20
+}
+</pre>
+
+<p>Sau khi parse:</p>
+
+<pre>
+{
+    name: "Diệu",
+    age: 20
+}
+</pre>
+
+<h3>Tại sao phải await lần nữa?</h3>
+
+<p>
+Vì response.json() cũng trả về Promise.
+</p>
+
+<pre>
+const data = response.json();
+
+console.log(data);
+</pre>
+
+<p>Kết quả:</p>
+
+<pre>
+Promise { &lt;pending&gt; }
+</pre>
+
+<p>
+Do đó phải dùng await để lấy dữ liệu thật.
+</p>
+
+</div>
+
+<div class="section">
+
+<h2>6. return data</h2>
+
+<pre>
+return data;
+</pre>
+
+<p>
+Nếu API thành công:
+</p>
+
+<pre>
+{
+    id: 1,
+    name: "Diệu"
+}
+</pre>
+
+<p>
+Hàm sẽ trả về:
+</p>
+
+<pre>
+Promise.resolve({
+    id: 1,
+    name: "Diệu"
+});
+</pre>
+
+</div>
+
+<div class="section">
+
+<h2>7. try...catch bắt những lỗi gì?</h2>
+
+<pre>
+try {
+    ...
+}
+catch(error) {
+    ...
+}
+</pre>
+
+<h3>Trường hợp 1: Network Error</h3>
+
+<p>
+Ví dụ:
+</p>
+
+<ul>
+<li>Mất mạng</li>
+<li>DNS lỗi</li>
+<li>Server không phản hồi</li>
+<li>Không kết nối được</li>
+</ul>
+
+<pre>
+await fetch(url);
+</pre>
+<p class="success">
+✓ Catch bắt được
+</p>
+
+<hr>
+
+<h3>Trường hợp 2: HTTP 404</h3>
+
+<p>
+fetch() KHÔNG tự throw lỗi.
+</p>
+
+<pre>
+Response {
+    status: 404,
+    ok: false
+}
+</pre>
+
+<p>
+Phải tự kiểm tra:
+</p>
+
+<pre>
+if (!response.ok) {
+    throw new Error(...)
+}
+</pre>
+
+<p class="success">
+✓ Catch bắt được nếu tự throw
+</p>
+
+<hr>
+
+<h3>Trường hợp 3: HTTP 401</h3>
+
+<pre>
+401 Unauthorized
+</pre>
+
+<p class="success">
+✓ Catch bắt được nếu tự throw
+</p>
+
+<hr>
+
+<h3>Trường hợp 4: HTTP 500</h3>
+
+<pre>
+500 Internal Server Error
+</pre>
+
+<p class="success">
+✓ Catch bắt được nếu tự throw
+</p>
+
+<hr>
+
+<h3>Trường hợp 5: JSON Parse Error</h3>
+
+<p>
+Server trả dữ liệu không đúng JSON:
+</p>
+
+<pre>
+Hello World
+</pre>
+
+<p>
+Nhưng code lại:
+</p>
+
+<pre>
+await response.json();
+</pre>
+
+<p>
+Sẽ phát sinh:
+</p>
+
+<pre>
+SyntaxError:
+Unexpected token H in JSON
+</pre>
+
+<p class="success">
+✓ Catch bắt được
+</p>
+
+</div>
+
+<div class="section">
+
+<h2>Bảng Tổng Kết</h2>
+
+<table>
+<tr>
+<th>Trường hợp</th>
+<th>Fetch tự throw?</th>
+<th>Catch bắt được?</th>
+</tr>
+
+<tr>
+<td>Mất mạng</td>
+<td>Có</td>
+<td>✓</td>
+</tr>
+
+<tr>
+<td>DNS lỗi</td>
+<td>Có</td>
+<td>✓</td>
+</tr>
+
+<tr>
+<td>Server không kết nối được</td>
+<td>Có</td>
+<td>✓</td>
+</tr>
+
+<tr>
+<td>404 Not Found</td>
+<td>Không</td>
+<td>✓ Nếu tự throw</td>
+</tr>
+
+<tr>
+<td>401 Unauthorized</td>
+<td>Không</td>
+<td>✓ Nếu tự throw</td>
+</tr>
+
+<tr>
+<td>500 Internal Server Error</td>
+<td>Không</td>
+<td>✓ Nếu tự throw</td>
+</tr>
+
+<tr>
+<td>JSON Parse Error</td>
+<td>Có</td>
+<td>✓</td>
+</tr>
+
+</table>
+
+</div>
+
+<div class="section">
+
+<h2>Luồng Hoạt Động</h2>
+
+<pre>
+getData()
+    │
+    ▼
+await fetch()
+    │
+    ▼
+Nhận Response
+    │
+    ▼
+response.ok ?
+    │
+ ┌──┴──┐
+ │     │
+true false
+ │     │
+ ▼     ▼
+json() throw Error
+ │       │
+ ▼       ▼
+return   catch()
+ data
+</pre>
+
+</div>
+
+</body>
+</html>

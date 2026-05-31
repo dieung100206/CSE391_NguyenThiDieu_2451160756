@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chiến lược xử lý lỗi E-Commerce API</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    max-width:1200px;
+    margin:auto;
+    padding:30px;
+    background:#f5f5f5;
+    line-height:1.8;
+}
+
+h1{
+    text-align:center;
+    color:#333;
+}
+
+.section{
+    background:#fff;
+    padding:20px;
+    margin-bottom:20px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+
+h2{
+    color:#0d6efd;
+}
+
+pre{
+    background:#1e1e1e;
+    color:white;
+    padding:15px;
+    border-radius:8px;
+    overflow:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+table,th,td{
+    border:1px solid #ccc;
+}
+
+th{
+    background:#0d6efd;
+    color:white;
+    padding:10px;
+}
+
+td{
+    padding:10px;
+}
+</style>
+</head>
+<body>
+
+<h1>Thiết kế chiến lược xử lý lỗi cho ứng dụng E-Commerce</h1>
+
+<div class="section">
+<h2>1. Các loại lỗi thường gặp khi gọi API</h2>
+
+<table>
+<tr>
+<th>Loại lỗi</th>
+<th>Ví dụ</th>
+<th>Cách xử lý</th>
+</tr>
+
+<tr>
+<td>Network Error</td>
+<td>Mất mạng, DNS lỗi</td>
+<td>Retry + Thông báo người dùng</td>
+</tr>
+
+<tr>
+<td>404 Not Found</td>
+<td>Sản phẩm không tồn tại</td>
+<td>Hiển thị trang Not Found</td>
+</tr>
+
+<tr>
+<td>429 Too Many Requests</td>
+<td>Gửi quá nhiều request</td>
+<td>Đợi rồi thử lại</td>
+</tr>
+
+<tr>
+<td>500 Internal Server Error</td>
+<td>Lỗi server</td>
+<td>Thông báo hệ thống bận</td>
+</tr>
+
+<tr>
+<td>Timeout</td>
+<td>API quá chậm</td>
+<td>Huỷ request và báo lỗi</td>
+</tr>
+</table>
+
+</div>
+
+<div class="section">
+
+<h2>2. Network Error (Mất mạng giữa chừng)</h2>
+
+<p>
+Ví dụ:
+</p>
+
+<ul>
+<li>Mất WiFi</li>
+<li>Rớt 4G</li>
+<li>Server không kết nối được</li>
+<li>DNS lỗi</li>
+</ul>
+
+<p>
+Fetch sẽ throw:
+</p>
+
+<pre>
+TypeError: Failed to fetch
+</pre>
+
+<p>
+Chiến lược:
+</p>
+
+<ul>
+<li>Hiển thị thông báo "Không có kết nối mạng"</li>
+<li>Tự động retry</li>
+<li>Lưu request để gửi lại sau</li>
+</ul>
+
+<h3>Ví dụ</h3>
+
+<pre>
+try {
+
+    const response = await fetch(url);
+
+}
+catch(error){
+
+    showToast(
+        "Không có kết nối Internet"
+    );
+
+}
+</pre>
+
+</div>
+
+<div class="section">
+
+<h2>3. API Error - 404 Not Found</h2>
+
+<p>
+Ví dụ người dùng mở:
+</p>
+
+<pre>
+/product/999999
+</pre>
+
+<p>
+Server trả:
+</p>
+
+<pre>
+404 Not Found
+</pre>
+
+<p>
+Cách xử lý:
+</p>
+
+<ul>
+<li>Hiển thị trang Product Not Found</li>
+<li>Cho quay về trang chủ</li>
+</ul>
+
+<pre>
+if(response.status === 404){
+
+    throw new Error(
+        "Product not found"
+    );
+
+}
+</pre>
+
+</div>
+
+<div class="section">
+
+<h2>4. API Error - 500 Internal Server Error</h2>
+
+<p>
+Server bị lỗi.</p>
+
+<p>
+Không nên retry liên tục.
+</p>
+
+<p>
+Hiển thị:
+</p>
+
+<pre>
+"Hệ thống đang bảo trì.
+Vui lòng thử lại sau."
+</pre>
+
+<pre>
+if(response.status >= 500){
+
+    throw new Error(
+        "Server Error"
+    );
+
+}
+</pre>
+
+</div>
+
+<div class="section">
+
+<h2>5. API Error - 429 Too Many Requests</h2>
+
+<p>
+Người dùng gửi quá nhiều request.
+</p>
+
+<p>
+Server trả:
+</p>
+
+<pre>
+429 Too Many Requests
+</pre>
+
+<p>
+Chiến lược:
+</p>
+
+<ul>
+<li>Đọc Retry-After header</li>
+<li>Đợi vài giây</li>
+<li>Gửi lại request</li>
+</ul>
+
+<pre>
+if(response.status === 429){
+
+    throw new Error(
+        "Too Many Requests"
+    );
+
+}
+</pre>
+
+</div>
+
+<div class="section">
+
+<h2>6. Timeout (> 10 giây)</h2>
+
+<p>
+Nếu API quá chậm:
+</p>
+
+<ul>
+<li>Huỷ request</li>
+<li>Thông báo cho người dùng</li>
+</ul>
+
+<h3>fetchWithTimeout()</h3>
+
+<pre>
+async function fetchWithTimeout(
+    url,
+    ms = 10000
+){
+
+    const controller =
+        new AbortController();
+
+    const timeoutId =
+        setTimeout(() => {
+
+            controller.abort();
+
+        }, ms);
+
+    try{
+
+        const response =
+            await fetch(url,{
+                signal:
+                    controller.signal
+            });
+
+        clearTimeout(timeoutId);
+
+        return response;
+
+    }
+    catch(error){
+
+        clearTimeout(timeoutId);
+
+        throw error;
+
+    }
+
+}
+</pre>
+
+<h3>Sử dụng</h3>
+
+<pre>
+try{
+
+    const response =
+        await fetchWithTimeout(
+            "/api/products",
+            10000
+        );
+
+}
+catch(error){
+
+    console.log(
+        "Request timeout"
+    );
+
+}
+</pre>
+
+</div>
+
+<div class="section">
+
+<h2>7. Retry Logic (Thử lại 3 lần)</h2>
+
+<p>
+Chỉ retry với lỗi mạng.
+</p>
+
+<p>
+Không retry với:
+</p>
+
+<ul>
+<li>404</li>
+<li>401</li>
+<li>403</li>
+</ul>
+
+<h3>fetchWithRetry()</h3>
+
+<pre>
+async function fetchWithRetry(
+    url,
+    maxRetries = 3
+){
+
+    let attempt = 0;
+
+    while(
+        attempt <= maxRetries
+    ){
+
+        try{
+
+            const response =
+                await fetch(url);
+
+            return response;
+
+        }
+        catch(error){
+
+            attempt++;
+
+            if(
+                attempt > maxRetries
+            ){
+                throw error;
+            }
+
+            console.log(
+                `Retry ${attempt}`
+            );
+
+            await new Promise(
+                resolve =>
+                    setTimeout(
+                        resolve,
+                        1000
+                    )
+            );
+
+        }
+
+    }
+
+}
+</pre>
+
+</div>
+
+<div class="section">
+
+<h2>8. Retry nâng cao (Exponential Backoff)</h2>
+
+<p>
+Thay vì đợi cố định 1 giây:
+</p>
+
+<pre>
+1s
+2s
+4s
+8s
+</pre>
+
+<p>
+Giảm tải cho server.
+</p>
+
+<pre>
+await new Promise(resolve =>
+
+    setTimeout(
+        resolve,
+        1000 * Math.pow(2, attempt)
+    )
+
+);
+</pre>
+
+</div>
+
+<div class="section">
+
+<h2>9. Hàm gọi API chuẩn cho E-Commerce</h2>
+
+<pre>
+async function getProducts(){
+
+    try{
+
+        const response =
+            await fetchWithRetry(
+                "/api/products",
+                3
+            );
+
+        if(!response.ok){
+            switch(
+                response.status
+            ){
+
+                case 404:
+                    throw new Error(
+                        "Not Found"
+                    );
+
+                case 429:
+                    throw new Error(
+                        "Too Many Requests"
+                    );
+
+                case 500:
+                    throw new Error(
+                        "Server Error"
+                    );
+
+            }
+
+        }
+
+        return await response.json();
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        return [];
+
+    }
+
+}
+</pre>
+
+</div>
+
+<div class="section">
+
+<h2>10. Kiến trúc xử lý lỗi đề xuất</h2>
+
+<pre>
+User Click
+    |
+    v
+Fetch API
+    |
+    v
+Network Error ?
+    |
+   YES
+    |
+ Retry 3 lần
+    |
+    v
+ Thành công ?
+    |
+   NO
+    |
+ Hiển thị Offline
+
+----------------------
+
+HTTP Error ?
+    |
+    +--404 -> Not Found
+    |
+    +--429 -> Retry Later
+    |
+    +--500 -> Server Error
+
+----------------------
+
+Timeout ?
+    |
+   YES
+    |
+ Abort Request
+    |
+ Show Timeout Message
+</pre>
+
+<p>
+Đây là chiến lược xử lý lỗi phổ biến trong các hệ thống E-Commerce thực tế như website bán hàng, đặt đồ ăn hoặc thương mại điện tử.
+</p>
+
+</div>
+
+</body>
+</html>

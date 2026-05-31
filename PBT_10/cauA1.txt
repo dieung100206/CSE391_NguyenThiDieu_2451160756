@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Event Loop - Dự đoán Output</title>
+
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        max-width: 1000px;
+        margin: 30px auto;
+        padding: 20px;
+        line-height: 1.8;
+        background: #f5f5f5;
+    }
+
+    h1,h2{
+        color:#333;
+    }
+
+    .box{
+        background:white;
+        padding:20px;
+        margin-bottom:20px;
+        border-radius:10px;
+        box-shadow:0 2px 8px rgba(0,0,0,.1);
+    }
+
+    pre{
+        background:#222;
+        color:#fff;
+        padding:15px;
+        overflow:auto;
+        border-radius:8px;
+    }
+
+    .output{
+        background:#dff0d8;
+        padding:15px;
+        border-radius:8px;
+        font-weight:bold;
+    }
+</style>
+</head>
+<body>
+
+<div class="box">
+    <h1>Bài tập Event Loop JavaScript</h1>
+
+    <h2>Đề bài</h2>
+
+<pre>
+console.log("1 - Start");
+
+setTimeout(() => console.log("2 - Timeout 0ms"), 0);
+
+Promise.resolve().then(() => console.log("3 - Promise"));
+
+console.log("4 - End");
+
+setTimeout(() => console.log("5 - Timeout 100ms"), 100);
+
+Promise.resolve().then(() => {
+    console.log("6 - Promise 2");
+    setTimeout(() => console.log("7 - Nested timeout"), 0);
+});
+</pre>
+</div>
+
+<div class="box">
+    <h2>Thứ tự Output</h2>
+
+    <div class="output">
+        1 - Start<br>
+        4 - End<br>
+        3 - Promise<br>
+        6 - Promise 2<br>
+        2 - Timeout 0ms<br>
+        7 - Nested timeout<br>
+        5 - Timeout 100ms
+    </div>
+</div>
+
+<div class="box">
+    <h2>Giải thích chi tiết</h2>
+
+    <h3>Bước 1: Chạy code đồng bộ (Synchronous)</h3>
+
+<pre>
+console.log("1 - Start");
+</pre>
+
+Kết quả:
+
+<pre>
+1 - Start
+</pre>
+
+Tiếp theo:
+
+<pre>
+setTimeout(() => console.log("2 - Timeout 0ms"), 0);
+</pre>
+
+Callback được đưa vào Macrotask Queue.
+
+Tiếp theo:
+
+<pre>
+Promise.resolve().then(() => console.log("3 - Promise"));
+</pre>
+
+Callback được đưa vào Microtask Queue.
+
+Tiếp theo:
+
+<pre>
+console.log("4 - End");
+</pre>
+
+Kết quả:
+
+<pre>
+4 - End
+</pre>
+
+Tiếp theo:
+
+<pre>
+setTimeout(() => console.log("5 - Timeout 100ms"), 100);
+</pre>
+
+Timer 100ms bắt đầu đếm.
+
+Tiếp theo:
+
+<pre>
+Promise.resolve().then(() => {
+    console.log("6 - Promise 2");
+    setTimeout(() => console.log("7 - Nested timeout"), 0);
+});
+</pre>
+
+Thêm vào Microtask Queue.
+
+Lúc này:
+
+<pre>
+Microtask Queue:
+[ Promise, Promise 2 ]
+
+Macrotask Queue:
+[ Timeout 0ms ]
+</pre>
+
+</div>
+
+<div class="box">
+    <h2>Bước 2: Event Loop xử lý Microtask Queue</h2>
+
+    <p>Microtask luôn được ưu tiên trước Macrotask.</p>
+
+    <p>Chạy Promise đầu tiên:</p>
+
+<pre>
+3 - Promise
+</pre>
+
+    <p>Chạy Promise thứ hai:</p>
+
+<pre>
+6 - Promise 2
+</pre>
+
+Trong Promise thứ hai:
+
+<pre>
+setTimeout(() => console.log("7 - Nested timeout"), 0);
+</pre>
+
+Được đưa vào cuối Macrotask Queue.
+
+<pre>
+Macrotask Queue:
+[
+    Timeout 0ms,
+    Nested timeout
+]
+</pre>
+
+</div>
+
+<div class="box">
+    <h2>Bước 3: Xử lý Macrotask Queue</h2>
+
+    <p>Macrotask đầu tiên:</p>
+
+<pre>
+2 - Timeout 0ms
+</pre>
+
+    <p>Macrotask tiếp theo:</p>
+
+<pre>
+7 - Nested timeout
+</pre>
+
+</div>
+
+<div class="box">
+    <h2>Bước 4: Sau 100ms</h2>
+
+    <p>Timer 100ms hoàn thành.</p>
+
+<pre>
+5 - Timeout 100ms
+</pre>
+
+</div>
+
+<div class="box">
+    <h2>Event Loop là gì?</h2>
+
+    <p>
+        Event Loop là cơ chế giúp JavaScript xử lý bất đồng bộ
+        mặc dù JavaScript chỉ có một luồng (Single Thread).
+    </p>
+
+<pre>
+┌───────────────┐
+│  Call Stack   │
+└───────┬───────┘
+        │
+        ▼
+┌───────────────┐
+│ Microtask Q. │
+│ Promise.then │
+│ queueMicrotask│
+└───────┬───────┘
+        │ Ưu tiên
+        ▼
+┌───────────────┐
+│ Macrotask Q. │
+│ setTimeout   │
+│ setInterval  │
+│ DOM Events   │
+└───────┬───────┘
+        │
+        ▼
+    Event Loop
+</pre>
+
+</div>
+
+<div class="box">
+    <h2>Quy tắc cần nhớ</h2>
+
+    <ol>
+        <li>Code đồng bộ chạy trước.</li>
+        <li>Microtask Queue luôn ưu tiên hơn Macrotask Queue.</li>
+        <li>Event Loop phải làm rỗng toàn bộ Microtask Queue trước khi xử lý Macrotask tiếp theo.</li>
+    </ol>
+
+<pre>
+Promise.resolve().then(() => console.log("Promise"));
+
+setTimeout(() => console.log("Timeout"), 0);
+</pre>
+
+Kết quả:
+
+<pre>
+Promise
+Timeout
+</pre>
+
+</div>
+
+</body>
+</html>
