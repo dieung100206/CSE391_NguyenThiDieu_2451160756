@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>innerHTML - innerText - textContent</title>
+</head>
+<body>
+
+    <h1>So sánh innerHTML, innerText và textContent</h1>
+
+    <div id="demo">
+        Hello
+        <span style="display:none">Hidden</span>
+    </div>
+
+    <hr>
+
+    <h2>Ví dụ XSS</h2>
+
+    <input
+        type="text"
+        id="search"
+        value='<img src=x onerror="alert(`Hacked!`)">'
+    >
+
+    <button onclick="unsafeExample()">
+        Chạy ví dụ nguy hiểm
+    </button>
+
+    <button onclick="safeExample()">
+        Chạy ví dụ an toàn
+    </button>
+
+    <div id="result"></div>
+
+    <script>
+
+        /*
+        ==========================================
+        SO SÁNH innerHTML, innerText, textContent
+        ==========================================
+
+        innerHTML
+        - Lấy/Gán nội dung HTML.
+        - Hiểu các thẻ HTML.
+        - Có nguy cơ XSS nếu nhận dữ liệu từ người dùng.
+
+        Ví dụ:
+        element.innerHTML = "<h2>Hello</h2>";
+
+        ------------------------------------------
+
+        innerText
+        - Lấy/Gán văn bản hiển thị.
+        - Không lấy phần tử bị display:none.
+
+        Ví dụ:
+        document.querySelector("#demo").innerText
+
+        Kết quả:
+        Hello
+
+        ------------------------------------------
+
+        textContent
+        - Lấy/Gán toàn bộ văn bản.
+        - Bao gồm cả phần tử bị ẩn.
+        - An toàn hơn innerHTML.
+
+        Ví dụ:
+        document.querySelector("#demo").textContent
+
+        Kết quả:
+        Hello Hidden
+        */
+
+
+        // ============================
+        // Kiểm tra innerText
+        // ============================
+
+        console.log("innerText:");
+        console.log(
+            document.querySelector("#demo").innerText
+        );
+
+        // ============================
+        // Kiểm tra textContent
+        // ============================
+
+        console.log("textContent:");
+        console.log(
+            document.querySelector("#demo").textContent
+        );
+
+        // ============================
+        // Ví dụ XSS NGUY HIỂM
+        // ============================
+
+        function unsafeExample() {
+
+            const userInput =
+                document.querySelector("#search").value;
+
+            // NGUY HIỂM
+            document.querySelector("#result").innerHTML =
+                userInput;
+        }
+
+        /*
+        Nếu người dùng nhập:
+
+        <img src=x onerror="alert('Hacked!')">
+
+        Trình duyệt sẽ tạo thẻ img thật.
+        Khi ảnh lỗi tải, onerror chạy.
+        => alert("Hacked!")
+
+        Đây là lỗ hổng XSS
+        */
+
+        // ============================
+        // Cách sửa AN TOÀN
+        // ============================
+
+        function safeExample() {
+            const userInput =
+                document.querySelector("#search").value;
+
+            document.querySelector("#result").textContent =
+                userInput;
+        }
+
+        /*
+        textContent hiển thị dữ liệu như văn bản.
+
+        <img src=x onerror="alert('Hacked!')">
+
+        sẽ hiện nguyên chuỗi ký tự
+        chứ không thực thi JavaScript.
+        */
+
+    </script>
+
+</body>
+</html>

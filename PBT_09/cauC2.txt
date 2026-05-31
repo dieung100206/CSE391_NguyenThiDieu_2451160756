@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Delegation & DocumentFragment</title>
+</head>
+<body>
+
+<script>
+
+/*
+==================================================
+CÂU 1: TẠI SAO BIND EVENT LÊN 1000 ELEMENTS LÀ BAD PRACTICE?
+==================================================
+
+Ví dụ:
+
+const items = document.querySelectorAll(".item");
+
+items.forEach(item => {
+    item.addEventListener("click", handleClick);
+});
+
+Nếu có 1000 phần tử:
+
+- Tạo 1000 Event Listener.
+- Tốn bộ nhớ (Memory).
+- Khó quản lý.
+- Hiệu năng giảm.
+- Phần tử thêm động sau này sẽ không tự có event.
+
+=> BAD PRACTICE.
+
+--------------------------------------------------
+EVENT DELEGATION
+--------------------------------------------------
+
+Thay vì gắn 1000 listener:
+
+<ul id="list">
+    <li>Item 1</li>
+    <li>Item 2</li>
+    ...
+</ul>
+
+Chỉ gắn 1 listener cho phần tử cha:
+
+document.querySelector("#list")
+    .addEventListener("click", function(e){
+
+        if(e.target.tagName === "LI"){
+            console.log(e.target.textContent);
+        }
+
+    });
+
+Lợi ích:
+
+✓ Chỉ cần 1 listener.
+✓ Tiết kiệm bộ nhớ.
+✓ Nhanh hơn.
+✓ Tự hoạt động với phần tử được thêm động.
+✓ Dễ bảo trì.
+
+==================================================
+CÂU 2: DOCUMENTFRAGMENT
+==================================================
+
+CODE GỐC
+--------------------------------------------------
+
+for (let i = 0; i < 1000; i++) {
+
+    const div = document.createElement("div");
+
+    div.textContent = `Item ${i}`;
+
+    document.body.appendChild(div);
+
+}
+
+Vấn đề:
+
+appendChild() được gọi 1000 lần.
+
+Mỗi lần:
+
+- DOM thay đổi.
+- Browser có thể phải:
+    + Recalculate Style
+    + Reflow
+    + Repaint
+
+=> Rất tốn tài nguyên.
+
+==================================================
+REFACTOR DÙNG DOCUMENTFRAGMENT
+==================================================
+*/
+
+const fragment = document.createDocumentFragment();
+
+for (let i = 0; i < 1000; i++) {
+
+    const div = document.createElement("div");
+
+    div.textContent = `Item ${i}`;
+
+    fragment.appendChild(div);
+}
+
+document.body.appendChild(fragment);
+
+/*
+==================================================
+TẠI SAO NHANH HƠN?
+==================================================
+
+DocumentFragment là DOM ảo tạm thời.
+
+Các phần tử được thêm vào Fragment
+không nằm trong DOM thật.
+
+Trong vòng lặp:
+
+fragment.appendChild(div);
+
+=> Không Reflow.
+=> Không Repaint.
+
+Sau khi tạo xong 1000 phần tử:
+
+document.body.appendChild(fragment);
+
+Browser chỉ cập nhật DOM 1 lần.
+
+--------------------------------------------------
+
+SO SÁNH
+
+Cách cũ:
+
+1000 lần appendChild
+=> Có thể gây ~1000 lần reflow.
+
+Cách mới:
+
+1000 lần append vào Fragment
++ 1 lần append Fragment vào DOM
+
+=> Chỉ 1 lần reflow.
+--------------------------------------------------
+
+KẾT LUẬN
+
+1. Event Delegation:
+   - Thay 1000 event listener bằng 1 listener.
+   - Tiết kiệm bộ nhớ và tăng hiệu năng.
+
+2. DocumentFragment:
+   - Tạo DOM trong bộ nhớ trước.
+   - Chỉ cập nhật DOM thật 1 lần.
+   - Giảm reflow/repaint.
+   - Nhanh hơn đáng kể khi thao tác nhiều phần tử.
+
+==================================================
+*/
+
+</script>
+
+</body>
+</html>

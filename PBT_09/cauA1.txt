@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Tree & Query Selector</title>
+</head>
+<body>
+
+    <div id="app">
+        <header>
+            <h1>Todo App</h1>
+            <nav>
+                <a href="#" class="active">All</a>
+                <a href="#">Active</a>
+                <a href="#">Completed</a>
+            </nav>
+        </header>
+
+        <main>
+            <form id="todoForm">
+                <input id="todoInput" type="text">
+                <button type="submit">Add</button>
+            </form>
+
+            <ul id="todoList">
+                <li class="todo-item">Learn HTML</li>
+                <li class="todo-item completed">Learn CSS</li>
+            </ul>
+        </main>
+    </div>
+
+    <script>
+        // ==========================
+        // DOM TREE
+        // ==========================
+        /*
+        div#app
+        ├── header
+        │   ├── h1
+        │   │   └── "Todo App"
+        │   └── nav
+        │       ├── a.active
+        │       │   └── "All"
+        │       ├── a
+        │       │   └── "Active"
+        │       └── a
+        │           └── "Completed"
+        │
+        └── main
+            ├── form#todoForm
+            │   ├── input#todoInput
+            │   └── button
+            │       └── "Add"
+            │
+            └── ul#todoList
+                ├── li.todo-item
+                │   └── "Learn HTML"
+                └── li.todo-item.completed
+                    └── "Learn CSS"
+        */
+
+        // ==========================
+        // QUERY SELECTOR
+        // ==========================
+
+        // 1. Chọn thẻ h1
+        const heading = document.querySelector("h1");
+
+        // 2. Chọn input trong form
+        const input = document.querySelector("#todoForm input");
+
+        // 3. Chọn tất cả .todo-item
+        const todoItems = document.querySelectorAll(".todo-item");
+
+        // 4. Chọn link đang active
+        const activeLink = document.querySelector("nav a.active");
+
+        // 5. Chọn li đầu tiên trong #todoList
+        const firstTodo = document.querySelector("#todoList li:first-child");
+
+        // 6. Chọn tất cả a bên trong nav
+        const navLinks = document.querySelectorAll("nav a");
+
+        // ==========================
+        // HIỂN THỊ KẾT QUẢ
+        // ==========================
+
+        console.log("Thẻ h1:", heading);
+
+        console.log("Input trong form:", input);
+
+        console.log("Danh sách todo-item:", todoItems);
+
+        console.log("Link active:", activeLink);
+
+        console.log("Li đầu tiên:", firstTodo);
+
+        console.log("Tất cả link trong nav:", navLinks);
+    </script>
+
+</body>
+</html>

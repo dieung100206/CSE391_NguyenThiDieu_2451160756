@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Counter App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+
+        button {
+            margin: 5px;
+            padding: 8px 12px;
+        }
+
+        .count {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        li {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Counter App</h1>
+
+    <div class="count">0</div>
+
+    <button id="incrementBtn">+</button>
+    <button id="decrementBtn">-</button>
+    <button id="resetBtn">Reset</button>
+    <button id="clearHistory">Clear History</button>
+
+    <h2>History</h2>
+
+    <ul id="history"></ul>
+
+    <script>
+
+        /*
+        ==========================================
+        CÁC LỖI TÌM ĐƯỢC (ÍT NHẤT 7 LỖI)
+        ==========================================
+
+        1. addEventListener("onclick")
+           -> phải là "click"
+
+        2. countDisplay = count
+           -> phải là countDisplay.textContent = count
+
+        3. historyList.innerHTML = null
+           -> nên dùng ""
+
+        4. item.remove
+           -> phải gọi item.remove()
+
+        5. localStorage.getItem() trả về string
+           -> cần Number(...)
+
+        6. Không load lại history từ localStorage
+
+        7. Sau khi load history, các event click bị mất
+           -> phải gắn lại event listener
+
+        8. Dùng innerHTML để hiển thị số đếm
+           -> nên dùng textContent
+
+        9. Có thể giảm count xuống âm vô hạn
+           -> nên kiểm tra nếu cần
+
+        Tổng cộng: 9 lỗi
+        ==========================================
+        */
+
+
+        const countDisplay =
+            document.querySelector(".count");
+
+        const historyList =
+            document.getElementById("history");
+
+        let count = 0;
+
+
+        // =====================
+        // Increment
+        // =====================
+
+        document.querySelector("#incrementBtn")
+            .addEventListener("click", function () {
+
+                count++;
+
+                countDisplay.textContent = count;
+
+                const li =
+                    document.createElement("li");
+
+                li.textContent =
+                    "Count changed to " + count;
+
+                li.addEventListener("click", function () {
+                    deleteHistory(this);
+                });
+
+                historyList.append(li);
+            });
+
+
+        // =====================
+        // Decrement
+        // =====================
+
+        document.querySelector("#decrementBtn")
+            .addEventListener("click", function () {
+
+                count--;
+
+                countDisplay.textContent = count;
+            });
+
+
+        // =====================
+        // Reset
+        // =====================
+
+        document.querySelector("#resetBtn")
+            .addEventListener("click", () => {
+
+                count = 0;
+
+                countDisplay.textContent = count;
+
+                historyList.innerHTML = "";
+            });
+
+
+        // =====================
+        // Delete 1 history item
+        // =====================
+
+        function deleteHistory(element) {
+            element.remove();
+        }
+
+
+        // =====================
+        // Clear all history
+        // =====================
+
+        document.querySelector("#clearHistory")
+            .addEventListener("click", () => {
+
+                const items =
+                    historyList.querySelectorAll("li");
+
+                items.forEach(item => {
+                    item.remove();
+                });
+
+            });
+
+
+        // =====================
+        // Save localStorage
+        // =====================
+
+        window.addEventListener("beforeunload", () => {
+
+            localStorage.setItem(
+                "count",
+                count
+            );
+
+            localStorage.setItem(
+                "history",
+                historyList.innerHTML
+            );
+
+        });
+
+
+        // =====================
+        // Load localStorage
+        // =====================
+
+        window.addEventListener("load", () => {
+
+            count =
+                Number(
+                    localStorage.getItem("count")
+                ) || 0;
+
+            countDisplay.textContent = count;
+
+            historyList.innerHTML =
+                localStorage.getItem("history")
+                || "";
+
+            // Gắn lại event cho history
+            historyList
+                .querySelectorAll("li")
+                .forEach(li => {
+
+                    li.addEventListener(
+                        "click",
+                        function () {
+                            deleteHistory(this);
+                        }
+                    );
+
+                });
+
+        });
+
+    </script>
+
+</body>
+</html>

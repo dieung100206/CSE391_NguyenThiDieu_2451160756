@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Bubbling & stopPropagation</title>
+</head>
+<body>
+
+    <div id="outer" style="padding:30px; border:2px solid red;">
+        OUTER
+        <div id="inner" style="padding:30px; border:2px solid blue;">
+            INNER
+            <button id="btn">Click me</button>
+        </div>
+    </div>
+
+    <script>
+
+        /*
+        ==========================================
+        CÂU HỎI
+        ==========================================
+
+        Khi click vào button:
+
+        <div id="outer">
+            <div id="inner">
+                <button id="btn">Click me</button>
+            </div>
+        </div>
+
+        document.querySelector("#outer")
+            .addEventListener("click", () => {
+                console.log("OUTER");
+            });
+
+        document.querySelector("#inner")
+            .addEventListener("click", () => {
+                console.log("INNER");
+            });
+
+        document.querySelector("#btn")
+            .addEventListener("click", (e) => {
+                console.log("BUTTON");
+            });
+
+        ==========================================
+        ĐÁP ÁN
+        ==========================================
+
+        Event Bubbling:
+
+        button
+           ↑
+        inner
+           ↑
+        outer
+
+        Khi click button:
+
+        OUTPUT:
+
+        BUTTON
+        INNER
+        OUTER
+
+        Vì sự kiện phát sinh ở button trước,
+        sau đó nổi bọt (bubble) lên các phần tử cha.
+
+        ==========================================
+        NẾU DÙNG stopPropagation()
+        ==========================================
+
+        document.querySelector("#btn")
+            .addEventListener("click", (e) => {
+                console.log("BUTTON");
+                e.stopPropagation();
+            });
+
+        OUTPUT:
+
+        BUTTON
+
+        Giải thích:
+        stopPropagation() ngăn sự kiện
+        lan truyền lên inner và outer.
+
+        ==========================================
+        CODE MINH HỌA
+        ==========================================
+        */
+
+        document.querySelector("#outer")
+            .addEventListener("click", () => {
+                console.log("OUTER");
+            });
+
+        document.querySelector("#inner")
+            .addEventListener("click", () => {
+                console.log("INNER");
+            });
+
+        document.querySelector("#btn")
+            .addEventListener("click", (e) => {
+                console.log("BUTTON");
+
+                // Bỏ comment để kiểm tra:
+                // e.stopPropagation();
+            });
+
+    </script>
+
+</body>
+</html>
