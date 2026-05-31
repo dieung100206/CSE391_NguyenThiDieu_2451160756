@@ -1,0 +1,106 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f4f4;
+    transition:.3s;
+}
+
+.dark-mode{
+    background:#1e1e1e;
+    color:white;
+}
+
+.header{
+    padding:20px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.cart{
+    position:fixed;
+    top:20px;
+    right:20px;
+    font-size:24px;
+}
+
+.badge{
+    background:red;
+    color:white;
+    border-radius:50%;
+    padding:2px 8px;
+    font-size:14px;
+}
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+    gap:20px;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 2px 10px rgba(0,0,0,.1);
+    cursor:pointer;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.dark-mode .card{
+    background:#333;
+}
+
+.card img{
+    width:100%;
+    display:block;
+}
+
+.card-body{
+    padding:10px;
+}
+
+.card button{
+    margin-top:10px;
+    width:100%;
+    padding:8px;
+}
+
+.filters{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.modal-content{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    max-width:400px;
+}
+
+.dark-mode .modal-content{
+    background:#222;
+    color:white;
+}
